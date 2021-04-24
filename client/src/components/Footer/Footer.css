@@ -1,0 +1,20 @@
+.footer{
+    background-color:#fff;
+    box-shadow:0 3px 2px rgba(245, 243, 243, 0.05);
+    height:31px;
+    padding:3px;
+    
+}
+.footer span{
+    font-weight: bold;
+    font-family: -webkit-pictograph;
+    color: #444;
+}
+
+.footer span a{
+    color: #444 !important;
+}
+
+.footer span a:hover{
+    text-decoration: underline;
+}

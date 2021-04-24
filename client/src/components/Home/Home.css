@@ -1,0 +1,12 @@
+.home{
+    color: #fff;   
+    font-weight: 500;
+    padding: 180px 180px;    
+    position: relative;
+}
+.home h2{
+    color: #fff;
+    text-transform: none;
+    font-size: 50px;
+    font-weight: 400;
+}

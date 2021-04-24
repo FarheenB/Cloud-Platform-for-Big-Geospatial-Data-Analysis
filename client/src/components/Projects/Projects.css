@@ -1,0 +1,48 @@
+.project-card {
+    min-height: 40vh;
+}
+
+.project-margin{
+    min-height: 5vh;
+}
+
+.projects .card {
+    box-shadow: 0 2px 2px 0 rgb(0 0 0 / 20%);
+    transition: 0.3s;
+    width: 100%;
+    border-radius: 5px;
+    padding: 5px 5px;
+    opacity: .7;
+    cursor: pointer;
+
+  }
+  
+.projects .card:hover {
+    /* box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2); */
+    opacity: 1;
+  }
+ 
+.projects .card .inner-card{
+    background: rgb(0 0 0 / 8%);
+    padding: 50px;
+}
+
+.projects .card .inner-card{
+    background: rgb(0 0 0 / 8%);
+    padding: 50px;
+}
+
+.projects .card .inner-card img{
+    width:70px;
+    
+}
+
+.projects .container{
+    padding: 12px 1px;
+  }
+
+.projects .container span{
+    font-size: 15px;
+    /* color: #117a8b;*/
+    font-weight: bold; 
+  }

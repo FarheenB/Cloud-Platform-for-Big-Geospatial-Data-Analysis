@@ -1,0 +1,48 @@
+.login{
+    min-height: 540px;
+    min-width: 100% !important;
+}
+
+.login .card {
+    min-height: 60vh;
+    box-shadow: 0 2px 2px 0 rgb(0 0 0 / 20%);
+    transition: 0.3s;
+    width: 100%;
+    border-radius: 5px;
+    opacity: 1;
+}
+
+.login .login-title{
+    margin-bottom: 10px;
+}
+
+.login .card .login-form{
+    min-width: 200px !important;
+
+}
+
+.form-checkbox{
+    text-align: left;
+}
+
+.form-checkbox label{
+    margin: 1vh;
+}
+
+.form-checkbox, .form-checkbox span, .forgot-password{
+    font-size: 11px !important;
+}
+
+.form-checkbox span{
+    font-size: 11px !important;
+}
+
+
+.registerMessage {
+    margin-top: 1vh;
+    
+
+}
+
+
+

@@ -1,0 +1,38 @@
+.loginText {
+    color: #117a8b;
+    /* font-weight: bold; */
+    cursor: pointer;
+}
+
+.register{
+    min-height: 540px;
+    min-width: 100% !important;
+    font-size: 14px !important;
+}
+
+.register .card {
+    min-height: 60vh;
+    min-height: 60vh;
+    box-shadow: 0 2px 2px 0 rgb(0 0 0 / 20%);
+    transition: 0.3s;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.register .card .register-title{
+    margin-bottom: 10px;
+}
+.register .card .register-form{
+    min-width: 200px !important;
+
+}
+.successMessage {
+    color: green;
+    font-weight: bold;
+}
+
+.error {
+    color:#db2269;
+    font-size: 0.7em;
+    display: relative;
+  }

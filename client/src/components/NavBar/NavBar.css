@@ -1,0 +1,36 @@
+header{background-color:#fff;box-shadow:0 3px 2px rgba(0,0,0,0.05);height:54px}
+header .fixed{left:0;position:fixed;top:0;width:100%;z-index:10}
+header a{color:#000;font-weight:500;text-decoration:none}
+header .navbar{margin:0 16px 0 24px;font-family:"Google Sans","Roboto",sans-serif; padding: 0px;}
+header .navbar .hamburger{display:none}
+header .navbar ul,header .navbar li{padding:0;margin:0}
+header .navbar .tabs{list-style:none}
+header .navbar .tabs .tab{display:inline-block;overflow:hidden}
+header .navbar .tabs .tab a{font-size:14px;line-height:54px;opacity:.6;padding:20px 14px;text-transform:capitalize}
+header .navbar .tabs .tab a:hover{background-color:#efefef;opacity:1}
+header .navbar .tabs .tab ul.dropdown{background-color:#fff;border-radius:0 0 2px 2px;box-shadow:0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.2),0 1px 5px 0 rgba(0,0,0,0.12);display:none;list-style:none;padding:8px 0;position:absolute;top:54px;right:102px}
+header .navbar .tabs .tab ul.dropdown li{opacity:.6}
+header .navbar .tabs .tab ul.dropdown li a{cursor:pointer;line-height:32px;opacity:1;padding:8px 24px}
+header .navbar .tabs .tab:hover{opacity:1}
+header .navbar .tabs .tab:hover ul.dropdown{display:block}
+header .navbar .tabs .tab:hover ul.dropdown li:hover{background-color:#efefef}
+header .navbar .tabs .tab:hover ul.dropdown a:hover{opacity:1}
+header .navbar .tabs .tab.selected{opacity:1}
+header .navbar .tabs .tab.selected a{opacity:1}
+header .navbar .logo{margin-left:-15px;padding-top:2px}
+header .navbar .logo a{font-size:14px;line-height:54px;opacity:.6;padding:20px 14px;text-transform:capitalize}
+header .navbar .logo a:hover{opacity:1}
+header .navbar .logo img{height:54px;padding-right:3px;}
+header .navbar .logo span{font-size:20px;padding-top:15px}
+@media only screen and (max-width: 1081px){
+header .navbar .hamburger{display:inline-block;float:left;margin:13px 16px 0 0;opacity:.6}
+header .navbar .hamburger:hover{cursor:pointer}
+header .navbar .hamburger img{height:24px;width:24px}
+header .navbar .tabs{display:none}
+header .navbar .logo{display:inline-block}
+}
+@media only screen and (max-width: 481px){
+    header .navbar{margin:0 12px}
+    header .navbar .hamburger{margin:13px 13px 0 0}
+}
+  
