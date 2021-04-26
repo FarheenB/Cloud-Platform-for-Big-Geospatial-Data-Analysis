@@ -22,12 +22,13 @@ function RegistrationForm(props) {
             email : "",
             password : "",
             confirmPassword : "",
+            form: ""
         }
 
     })
 
     const handleChange = (e) => {
-        props.showError(null);
+        state.errors.form="";
         const {id , value} = e.target   
         setState(prevState => ({
             ...prevState,
@@ -40,26 +41,26 @@ function RegistrationForm(props) {
             case 'username': 
               errors.username = 
                 value.length < 5
-                  ? 'Username must be 5 characters long'
+                  ? 'Must be 5 or more characters'
                   : '';
               break;
               case 'email': 
               errors.email = 
                 validEmailRegex.test(value)
                   ? ''
-                  : 'Email address is not valid';
+                  : 'Invalid email address';
               break;
             case 'password': 
               errors.password = 
                 value.length < 8
-                  ? 'Password must be 8 characters long'
+                  ? 'Must be 8 or more characters'
                   : '';
               break;
               case 'confirmPassword': 
               errors.confirmPassword = 
-                    id.password!==value
-                  ? 'Passwords does not match'
-                  : '';
+                    state.password===value
+                  ? ''
+                  : 'Passwords do not match';
               break;
             default:
               break;
@@ -81,7 +82,8 @@ function RegistrationForm(props) {
         for(let name in data) {
             if(data[name]===""){
                 err=true;
-                props.showError("All fields are required")
+                state.errors.form="All fields are required";
+                setState({errors: state.errors});
                 break;
             }
         }
@@ -102,7 +104,8 @@ function RegistrationForm(props) {
                 props.showError(null)
             }
             else{
-                props.showError(data.error);
+                state.errors.form=data.error;   
+                setState({errors: state.errors});
             }
             }).catch(err => console.log(err));
         }
@@ -160,6 +163,7 @@ function RegistrationForm(props) {
                         />
                         {errors.password.length > 0 && 
                         <span className='error'>{errors.password}</span>}
+                        
                     </div>
                     <div className="form-group text-left">
                         <input type="password" 
@@ -179,11 +183,16 @@ function RegistrationForm(props) {
                     >
                         Register
                     </button>
-                </form>
-                <div className="mt-2">
+                
+                <div className="login-message">
                     <span>Already have an account? </span>
                     <span className="loginText" onClick={() => redirectToLogin()}>Login here</span> 
                 </div>
+                {errors.form.length > 0 && 
+                    <div class="form-error">
+                    <span className='error'>{errors.form}</span>
+                    </div>}
+                </form>
             </div>    
         </div>
     )
