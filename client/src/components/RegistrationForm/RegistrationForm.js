@@ -83,10 +83,17 @@ function RegistrationForm(props) {
             if(data[name]===""){
                 err=true;
                 state.errors.form="All fields are required";
-                setState({errors: state.errors});
+                setState({username:state.username,email:state.email, password:state.password,confirmPassword:state.confirmPassword, errors: state.errors});
                 break;
             }
         }
+
+        // console.log(state.username);
+        // console.log(state.email);
+        // console.log(state.password);
+        // console.log(state.confirmPassword);
+
+
 
         if(validateForm(state.errors) && !err){
             fetch(url, {
@@ -94,29 +101,30 @@ function RegistrationForm(props) {
                 body: formData
             }).then( res => res.json())
             .then(data=>{
-                localStorage.setItem('access_token', data.access_token);
-                localStorage.setItem('refresh_token', data.refresh_token);
-                localStorage.setItem('email', data.email);
-                localStorage.setItem('username', data.username);
+                sessionStorage.setItem('access_token', data.access_token);
+                sessionStorage.setItem('refresh_token', data.refresh_token);
+                sessionStorage.setItem('email', data.email);
+                sessionStorage.setItem('username', data.username);
         
-            if (localStorage.getItem("access_token") !== null && localStorage.getItem("access_token")!=="undefined") {
+            if (sessionStorage.getItem("access_token") !== null && sessionStorage.getItem("access_token")!=="undefined") {
                 window.location.replace("/projects")
                 props.showError(null)
             }
             else{
                 state.errors.form=data.error;   
-                setState({errors: state.errors});
+                setState({username:state.username,email:state.email, password:state.password,confirmPassword:state.confirmPassword, errors: state.errors});
+
             }
             }).catch(err => console.log(err));
         }
     }
 
     const redirectToHome = () => {
-        props.showError(null);
+        // props.showError(null);
         props.history.push('/home');
     }
     const redirectToLogin = () => {
-        props.showError(null);
+        // props.showError(null);
         props.history.push('/login'); 
     }
 
@@ -126,7 +134,7 @@ function RegistrationForm(props) {
         <div className="register hv-center">
             <div className="card col-12 col-lg-3 hv-center">
                 <div className="register-title">
-                    <h4>Register</h4>
+                    <h4>REGISTER</h4>
                 </div>
                 <form className="register-form">
                     <div className="form-group text-left">

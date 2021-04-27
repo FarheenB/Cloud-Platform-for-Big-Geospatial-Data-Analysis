@@ -8,41 +8,68 @@ import Home from './components/Home/Home';
 import Projects from './components/Projects/Projects';
 import CreateProject from './components/CreateProject/CreateProject';
 import PrivateRoute from './utils/PrivateRoute';
+
+
+import BackgroundSlider from 'react-background-slider'
+
+import image1 from './static/images/satellite-earth-imaging.png'
+import image2 from './static/images/satellite-wildfire-imaging.png'
+import image4 from './static/images/satellite-sea-imaging.png'
+import image5 from './static/images/satellite-urban-imaging.png'
+import image6 from './static/images/satellite-bushfire-imaging.png'
+import image7 from './static/images/satellite-sprawling-imaging.png'
+
+
+
+
 import {
   BrowserRouter as Router,
   Switch,
   Route
 } from "react-router-dom";
 import AlertComponent from './components/AlertComponent/AlertComponent'; 
+
 function App() {
-  const [title, updateTitle] = useState(null);
-  const [errorMessage, updateErrorMessage] = useState(null);
+  console.log(sessionStorage.getItem("username"));
+  const [state , setState] = useState({
+      username:sessionStorage.getItem("username")
+  });
+
   return (
     <Router>
     <div className="App">
       <NavBar/>
         <div className="container d-flex align-items-center flex-column container-size">
-          <AlertComponent errorMessage={errorMessage} hideError={updateErrorMessage}/>
-
+          <BackgroundSlider images={[ image1, image2,image4,image5,image6,image7 ]}
+          duration={10} transition={1} />
           <Switch>
             <Route path="/" exact={true}>
               <Home/>
             </Route>
             <Route path="/register">
-              <RegistrationForm showError={updateErrorMessage} updateTitle={updateTitle}/>
+              {state.username===null &&
+              <RegistrationForm/>}
+              {state.username!==null &&
+              <Home/>}
             </Route>
             <Route path="/login">
-              <LoginForm showError={updateErrorMessage} updateTitle={updateTitle}/>
+              {state.username===null &&
+              <LoginForm/>}
+              {state.username!==null &&
+              <Home/>}
             </Route>
             <Route path="/projects">
-              <Projects showError={updateErrorMessage} updateTitle={updateTitle}/>
+              {state.username===null &&
+              <LoginForm/>}
+              {state.username!==null &&
+              <Projects/>}
             </Route>
             <Route path="/home">
               <Home/>
             </Route>
-            <Route path="/create_project">
+            {/* <Route path="/create_project">
               <CreateProject/>
-            </Route>
+            </Route> */}
           </Switch>
         </div>
         <Footer/>

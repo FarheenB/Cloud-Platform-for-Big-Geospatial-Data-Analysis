@@ -39,17 +39,9 @@ function NavBar(props) {
     //     }
     // }
     function handleLogout() {
-        localStorage.removeItem(ACCESS_TOKEN_NAME)
-        sessionStorage.removeItem('access_token');
-        sessionStorage.removeItem('refresh_token');
-        sessionStorage.removeItem('email');
-        sessionStorage.removeItem('username');
+        sessionStorage.clear();
         if(state.rememberMe){
-            localStorage.removeItem('access_token');
-            localStorage.removeItem('refresh_token');
-            localStorage.removeItem('email');
-            localStorage.removeItem('username');
-            localStorage.removeItem('rememberMe');
+            localStorage.clear();
 
         }
         props.history.push('/home')
@@ -74,8 +66,8 @@ function NavBar(props) {
                     {state.username!=="" &&
                     <li className="tab "> <a href="/home"><i class="fa fa-user-circle-o fa-2x" aria-hidden="true"></i></a> 
                         <ul className="dropdown">   
-                            <li> <a href="/profile"><span><i class="fa fa-bookmark-o"></i></span><span className="username">{state.username}</span></a></li> 
-                            <li> <a href="/notebook"><span><i class="fa fa-file-code-o"></i></span><span>Notebook</span></a> </li> 
+                            <li className="username"> <a href="/profile"><span><i class="fa fa-bookmark-o"></i></span><span>{state.username}</span></a></li> 
+                            <li> <a href="/notebook"><span><i class="fa fa-file-code-o"></i></span><div>Notebook</div></a> </li> 
                             <li> <a href="/sessions"><span><i class="fa fa-bar-chart-o"></i></span><span>Sessions</span></a> </li> 
                             <li onClick={() => handleLogout()}> <a href=""><span><i class="fa fa-sign-out signout" ></i></span><span>Logout</span></a> </li> 
                         </ul>  

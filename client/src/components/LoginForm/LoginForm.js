@@ -15,13 +15,16 @@ function LoginForm(props) {
     const [state , setState] = useState({
         email : "",
         password : "",
+        rememberMe:false,
         errors:{
             email : "",
-            password : ""
+            password : "",
+            form : ""
         }
     })
     const handleChange = (e) => {
-        props.showError(null);
+        console.log(state);
+        state.errors.form="";
         const {id , value} = e.target   
         setState(prevState => ({
             ...prevState,
@@ -35,7 +38,7 @@ function LoginForm(props) {
               errors.email = 
                 validEmailRegex.test(value)
                   ? ''
-                  : 'Email address is not valid';
+                  : 'Invalid email address';
               break;
             default:
               break;
@@ -56,39 +59,48 @@ function LoginForm(props) {
         for(let name in data) {
             if(data[name]===""){
                 err=true;
-                props.showError("All fields are required")
+                state.errors.form="All fields are required";
+                setState({email:state.email, password:state.password, rememberMe:state.rememberMe, errors: state.errors});
                 break;
             }
         }
 
+        console.log(state);
         if(validateForm(state.errors) && !err){
             fetch(url, {
                 method: 'POST',
                 body: formData
             }).then( res => res.json())
             .then(data=>{
-                localStorage.setItem('access_token', data.access_token);
-                localStorage.setItem('refresh_token', data.refresh_token);
-                localStorage.setItem('email', data.email);
-                localStorage.setItem('username', data.username);
-            
-                if (localStorage.getItem("access_token") !== null && localStorage.getItem("access_token")!=="undefined") {
+                sessionStorage.setItem('access_token', data.access_token);
+                sessionStorage.setItem('refresh_token', data.refresh_token);
+                sessionStorage.setItem('email', data.email);
+                sessionStorage.setItem('username', data.username);
+                if(state.rememberMe){
+                    localStorage.setItem('access_token', data.access_token);
+                    localStorage.setItem('refresh_token', data.refresh_token);
+                    localStorage.setItem('email', data.email);
+                    localStorage.setItem('username', data.username);
+                    localStorage.setItem('rememberMe', state.rememberMe);
+
+                }
+                if (sessionStorage.getItem("access_token") !== null && sessionStorage.getItem("access_token")!=="undefined") {
                     window.location.replace("/projects")
-                    props.showError(null)
                 }
                 else{
-                    props.showError(data.error);
+                    state.errors.form=data.error;
+                    setState({email:state.email, password:state.password, errors: state.errors});
                 }
             }).catch(err => console.log(err));
         }
     }
       
     const redirectToHome = () => {
-        props.showError(null)
+        // props.showError(null)
         props.history.push('/home');
     }
     const redirectToRegister = () => {
-        props.showError(null)
+        // props.showError(null)
         props.history.push('/register'); 
     }
 
@@ -97,9 +109,9 @@ function LoginForm(props) {
     return(
         <div className="login hv-center">
             <div className="card col-12 col-lg-3 hv-center">
-                <div className="login-title">
-                    <h4>Login</h4>
-                </div>
+                 <div className="login-title">
+                    <h4>LOGIN</h4>
+                 </div>
                 <form className="login-form"> 
                     <div className="form-group text-left">
                     <input type="email" 
@@ -111,7 +123,7 @@ function LoginForm(props) {
                         onChange={handleChange}
                     />
                     {errors.email.length > 0 && 
-                    <span className='error'>{state.errors.email}</span>}
+                    <span className='error'>{errors.email}</span>}
                     </div>
                     <div className="form-group text-left">
                     <input type="password" 
@@ -121,11 +133,11 @@ function LoginForm(props) {
                         value={state.password}
                         onChange={handleChange} 
                     />
-                    {state.errors.password.length > 0 && 
+                    {errors.password.length > 0 && 
                     <span className='error'>{errors.password}</span>}
                     </div>
-                    <div className="form-checkbox">
-                        <input type="checkbox" id="remember" name="remember" value="remember"/>
+                    <div className="remember-me-checkbox">
+                        <input type="checkbox" id="rememberMe" name="remember" value="true" onChange={handleChange} />
                         <label for="remember">Remember me</label>
                     </div>
                     <button 
@@ -133,15 +145,23 @@ function LoginForm(props) {
                         className="btn btn-primary"
                         onClick={handleLogin}
                     >Login</button>
-                </form>
                 
-                <div className="registerMessage">
+                
+                <div className="forgot-password"><a href="/">Forgot Password?</a></div>
+
+                <div className="register-message">
                     <span>Dont have an account? </span>
                     <span className="loginText" onClick={() => redirectToRegister()}>Register</span> 
                 </div>
-                <div className="forgot-password"><a href="/">Forgot Password</a></div>
-            </div>
-        </div>
+                
+                {errors.form.length > 0 && 
+                    <div class="form-error">
+                    <span className='error'>{errors.form}</span>
+                    </div>}
+                </form>
+         </div>
+         </div>
+        
     )
 }
 

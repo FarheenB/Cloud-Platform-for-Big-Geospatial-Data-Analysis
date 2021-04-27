@@ -6,24 +6,30 @@
 
 .register{
     min-height: 540px;
-    min-width: 100% !important;
-    font-size: 14px !important;
+    min-width:350px !important;
 }
 
 .register .card {
-    min-height: 60vh;
-    min-height: 60vh;
-    box-shadow: 0 2px 2px 0 rgb(0 0 0 / 20%);
-    transition: 0.3s;
-    width: 100%;
-    border-radius: 5px;
+    min-width: 100% !important;
+    position: relative;
+    margin: 0 auto;
+    background: #e9ecefcc;
+    padding: 30px;
+    border: 1px solid;
+    border-top-color: rgba(255,255,255,.4);
+    border-left-color: rgba(255,255,255,.4);
+    border-bottom-color: rgba(60,60,60,.4);
+    border-right-color: rgba(60,60,60,.4);
 }
 
 .register .card .register-title{
-    margin-bottom: 10px;
+    font-size: 32px;
+	font-weight: 600;
+	padding-bottom: 10px;
+	text-align: center;
 }
 .register .card .register-form{
-    min-width: 200px !important;
+    min-width: 250px !important;
 
 }
 .successMessage {
@@ -32,7 +38,39 @@
 }
 
 .error {
-    color:#db2269;
-    font-size: 0.7em;
+    color:#ca3b27;
+    font-size: 0.8em;
     display: relative;
   }
+
+.form-error{
+    box-sizing: border-box !important;
+    display: block !important;
+    font-family: ff-clan-web-pro, "Helvetica Neue", Helvetica, sans-serif !important;
+    font-weight: 400 !important;
+    position: relative !important;
+    background-color: #feefeb !important;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+    padding-right: 30px !important;
+    padding-left: 24px !important;
+    border-left: 4px solid #ca3b27 !important;
+    margin-bottom: 24px !important;
+    margin-top: 24px !important;
+
+}
+
+
+.login-message {
+    margin-top: 2vh;
+    text-align:left !important;   
+    font-size: 12px !important;
+}
+
+.login-message span{   
+    font-size: 12px !important;
+}
+
+.form-control{
+    border: 1px solid #8B90AA !important;
+}

@@ -34,18 +34,18 @@ header .navbar .logo{display:inline-block}
     header .navbar .hamburger{margin:13px 13px 0 0}
 }
   
-header .navbar .tabs .tab ul.dropdown li .username{text-transform:capitalize;
+header .navbar .tabs .tab ul.dropdown li.username{text-transform:capitalize;
     border-bottom: 1px solid rgb(214, 214, 214);
-    margin:15px;
-    }
+}
     
-    header .navbar .tabs .tab ul.dropdown li a span{text-transform:capitalize;
-        padding-left:10px;
-        text-align: left;
-        }
-    header .navbar .tabs .tab ul.dropdown li a .signout{
-        font-size: 18px;
+header .navbar .tabs .tab ul.dropdown li a span,header .navbar .tabs .tab ul.dropdown li a div{text-transform:capitalize;
+    padding-left:10px;
+    text-align: left !important;
+    float:left;
     }
-    header .navbar .tabs .tab ul.dropdown li a .profile{
-        font-size: 19px;
-    }
+header .navbar .tabs .tab ul.dropdown li a .signout{
+    font-size: 18px;
+}
+header .navbar .tabs .tab ul.dropdown li a .profile{
+    font-size: 19px;
+}
