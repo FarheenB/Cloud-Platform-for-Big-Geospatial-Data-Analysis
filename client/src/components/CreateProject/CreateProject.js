@@ -1,30 +1,99 @@
 import React, {useState} from 'react';
 import { withRouter } from "react-router-dom";
-import Popup from './Popup';
+import './CreateProject.css';
+import { Container } from './CreateProjectContainer';
+
+
 
 function CreateProject(props) {
-    const [isOpen, setIsOpen] = useState(false);
+    const [state,setState]=useState({
+      errors:"",
+      success:false,
+      newProject:{}
+    });
  
-  const togglePopup = () => {
-    setIsOpen(!isOpen);
+
+  const handleChange = (e) => {
+    console.log("Inside create Proj",state);
+    state.errors="";
+    const {id , value} = e.target   
+    setState(prevState => ({
+        ...prevState,
+        [id] : value
+    }))
   }
- 
-  return( <div className="projects hv-center">
-    <input
-      type="button"
-      value="Click to Open Popup"
-      onClick={togglePopup}
-    />
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-    {isOpen && <Popup
-      content={<>
-        <b>Design your Popup</b>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <button>Test button</button>
-      </>}
-      handleClose={togglePopup}
-    />}
-  </div>
+
+  const onSubmit = (event) => {
+    event.preventDefault(event);
+    console.log("Event----",event);
+    // console.log(event.target.description.value);
+    let title=event.target.title.value;
+    let description=event.target.description.value;
+    let username=sessionStorage.getItem('username');
+
+      let url = "/create_project"
+      let formData  = new FormData();
+      let data={
+      "title": title,
+      "description": description,
+      "username": username
+    };
+
+   
+      let err=false;
+      // for(let name in data) {
+          if(title===""){
+              err=true;
+              state.errors="Title is required";
+              const {id , value} = event.target   
+              setState(prevState => ({
+                  ...prevState,
+                  [id] : value
+              }))
+              console.log("Errors----",state);
+              // break;
+          }
+      // }
+  
+      for(let name in data) {
+        formData.append(name, data[name]);
+      }
+
+      console.log(state);
+      if(!err){
+        fetch(url, {
+            method: 'POST',
+            body: formData
+        }).then( res => res.json())
+        .then(data=>{
+          // console.log("data",data);
+          if(!data.success)
+            state.errors="Invalid entry";
+            state.newProject=data.new_project;
+            state.success=data.success;
+          const {id , value} = event.target   
+            setState(prevState => ({
+                ...prevState,
+                [id] : value
+            }))
+          // setState({errors: state.errors, newProject:data.new_project, success:data.success});
+
+          console.log("Success---",state);
+
+        }).catch(err => console.log(err));
+  
+    }
+  
+  };
+
+  return(
+       
+    <Container handleChange={handleChange} onSubmit={onSubmit} errors={state.errors}/>
+
+      
+        
+      
+
         
     )
 }

@@ -31,6 +31,12 @@ import AlertComponent from './components/AlertComponent/AlertComponent';
 
 function App() {
   console.log(sessionStorage.getItem("username"));
+  if(localStorage.getItem("username")){
+    sessionStorage.setItem('access_token', localStorage.getItem('access_token'));
+    sessionStorage.setItem('refresh_token', localStorage.getItem('refresh_token'));
+    sessionStorage.setItem('email', localStorage.getItem('email'));
+    sessionStorage.setItem('username', localStorage.getItem('username'));
+  }
   const [state , setState] = useState({
       username:sessionStorage.getItem("username")
   });
@@ -40,19 +46,24 @@ function App() {
     <div className="App">
       <NavBar/>
         <div className="container d-flex align-items-center flex-column container-size">
-          <BackgroundSlider images={[ image1, image2,image4,image5,image6,image7 ]}
-          duration={10} transition={1} />
+          
           <Switch>
             <Route path="/" exact={true}>
+            <BackgroundSlider images={[ image1, image2,image4,image5,image6,image7 ]}
+          duration={10} transition={1} />
               <Home/>
             </Route>
             <Route path="/register">
+            <BackgroundSlider images={[ image1, image2,image4,image5,image6,image7 ]}
+          duration={10} transition={1} />
               {state.username===null &&
               <RegistrationForm/>}
               {state.username!==null &&
               <Home/>}
             </Route>
             <Route path="/login">
+            <BackgroundSlider images={[ image1, image2,image4,image5,image6,image7 ]}
+          duration={10} transition={1} />
               {state.username===null &&
               <LoginForm/>}
               {state.username!==null &&
@@ -65,6 +76,8 @@ function App() {
               <Projects/>}
             </Route>
             <Route path="/home">
+            <BackgroundSlider images={[ image1, image2,image4,image5,image6,image7 ]}
+          duration={10} transition={1} />
               <Home/>
             </Route>
             {/* <Route path="/create_project">

@@ -60,7 +60,12 @@ function LoginForm(props) {
             if(data[name]===""){
                 err=true;
                 state.errors.form="All fields are required";
-                setState({email:state.email, password:state.password, rememberMe:state.rememberMe, errors: state.errors});
+                const {id , value} = e.target   
+                setState(prevState => ({
+                    ...prevState,
+                    [id] : value
+                }))
+                // setState({email:state.email, password:state.password, rememberMe:state.rememberMe, errors: state.errors});
                 break;
             }
         }
@@ -89,7 +94,12 @@ function LoginForm(props) {
                 }
                 else{
                     state.errors.form=data.error;
-                    setState({email:state.email, password:state.password, errors: state.errors});
+                    const {id , value} = e.target   
+                    setState(prevState => ({
+                        ...prevState,
+                        [id] : value
+                    }))
+                            // setState({email:state.email, password:state.password, errors: state.errors});
                 }
             }).catch(err => console.log(err));
         }

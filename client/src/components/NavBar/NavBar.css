@@ -18,7 +18,7 @@ header .navbar .tabs .tab:hover ul.dropdown a:hover{opacity:1}
 header .navbar .tabs .tab.selected{opacity:1}
 header .navbar .tabs .tab.selected a{opacity:1}
 header .navbar .logo{margin-left:-15px;padding-top:2px}
-header .navbar .logo a{font-size:14px;line-height:54px;opacity:.6;padding:20px 14px;text-transform:capitalize}
+header .navbar .logo a{font-size:14px;line-height:55px;opacity:.6;padding:20px 14px;text-transform:capitalize}
 header .navbar .logo a:hover{opacity:1}
 header .navbar .logo img{height:54px;padding-right:3px;}
 header .navbar .logo span{font-size:20px;padding-top:15px}
