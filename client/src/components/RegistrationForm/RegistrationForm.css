@@ -16,10 +16,12 @@
     background: #e9ecefcc;
     padding: 30px;
     border: 1px solid;
-    border-top-color: rgba(255,255,255,.4);
+    /* border-top-color: rgba(255,255,255,.4);
     border-left-color: rgba(255,255,255,.4);
     border-bottom-color: rgba(60,60,60,.4);
-    border-right-color: rgba(60,60,60,.4);
+    border-right-color: rgba(60,60,60,.4); */
+    border-color:rgba(255,255,255,.4);
+
 }
 
 .register .card .register-title{
@@ -55,7 +57,7 @@
     padding-right: 30px !important;
     padding-left: 24px !important;
     border-left: 4px solid #ca3b27 !important;
-    margin-bottom: 24px !important;
+    /* margin-bottom: 24px !important; */
     margin-top: 24px !important;
 
 }

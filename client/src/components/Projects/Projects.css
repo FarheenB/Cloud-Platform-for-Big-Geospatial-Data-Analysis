@@ -18,12 +18,12 @@
 .create-projects .card {
     box-shadow: 0 2px 2px 0 rgb(0 0 0 / 20%);
     transition: 0.3s;
-    width: 100%;
+    /* width: 100%; */
     border-radius: 5px;
     padding: 5px 5px;
     opacity: 0.7;
     cursor: pointer;
-    width: 18em;
+    min-width: 18em;
     height: 13em;
     text-align: center;
     background-color: #f1f1f1;
@@ -31,13 +31,13 @@
   .projects .card {
     box-shadow: 0 2px 2px 0 rgb(0 0 0 / 20%);
     transition: 0.3s;
-    width: 100%;
+    /* width: 100%; */
     border-radius: 5px;
     padding: 5px 5px;
     /* padding-bottom: 30px; */
     opacity: 1;
     /* cursor: pointer; */
-    width: 18em;
+    min-width: 18em;
     height: 13em;
     text-align: center;
     background-color: #f1f1f1;
@@ -71,7 +71,8 @@
    */
    background-color: #fff;
   
-   padding: 10px;
+   padding: 15px;
+   padding-bottom: 5px;
   /* width: 15em;
   height: 15em; */
   width: -webkit-fill-available;
@@ -81,14 +82,14 @@
 
 .create-projects .card .inner-card img{
     /* width:70px; */
-    padding-top: 10px;
+    /* padding-top: 10px; */
     
 }
 
 .projects .card .inner-card img{
   width:80px;
   float:left;
-  margin-left: 10px;
+  /* margin-left: 10px; */
   
 }
 .projects .card .inner-card .project-details {
@@ -96,14 +97,14 @@
   
 }
 .project-created-by{
-    padding-top: 20px;
+    padding-top: 10px;
     text-align: left !important;
-    padding-left: 110px;
+    padding-left: 100px;
 }
 
 .project-time{
   text-align: left !important;
-  padding-left: 110px;
+  padding-left: 100px;
 }
 .project-created-by span{
   font-size: 11px !important;
@@ -116,15 +117,15 @@
 .project-title
 {
   /* position: fixed; */
-  padding-top: 18px;
+  padding-top: 25px;
   text-align: left;
-  padding-left: 10px;
+  /* padding-left: 10px; */
 
 }
 
 .project-title a:hover
 {
-  text-decoration: underline;
+  color:#000
 }
 
 .project-title span{
@@ -136,7 +137,7 @@
 {
   /* position: fixed; */
   /* padding-top: 40px; */
-  padding-left: 10px;
+  /* padding-left: 10px; */
 
   text-align: left;
 
@@ -144,6 +145,7 @@
 
 .project-description span{
   font-size: 11px !important;
+  color:#6c757d
 }
 
 .project-description a{
@@ -159,10 +161,10 @@
     font-weight: 500; 
   }
 
-  /* Float four columns side by side */
-  .row .column {
+ 
+  .projects-row .column {
     float: left;
-    width: 20%;
+    width: 19em;
     padding: 0 10px;
   }
   
@@ -178,10 +180,13 @@
     clear: both;
   }
   
+  .project-footer:hover{
+    cursor:pointer
+  }
   /* Responsive columns */
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 800px) {
    .row .column {
-      width: 100%;
+      /* width: 100%; */
       display: block;
       margin-bottom: 20px;
     }

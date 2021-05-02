@@ -6,6 +6,9 @@ import LoginForm from './components/LoginForm/LoginForm';
 import RegistrationForm from './components/RegistrationForm/RegistrationForm';
 import Home from './components/Home/Home';
 import Projects from './components/Projects/Projects';
+import Scripts from './components/Scripts/Scripts';
+import NotebookComponent from './components/NotebookComponent/NotebookComponent'
+
 import CreateProject from './components/CreateProject/CreateProject';
 import PrivateRoute from './utils/PrivateRoute';
 
@@ -50,12 +53,12 @@ function App() {
           <Switch>
             <Route path="/" exact={true}>
             <BackgroundSlider images={[ image1, image2,image4,image5,image6,image7 ]}
-          duration={10} transition={1} />
+          duration={10} transition={1}/>
               <Home/>
             </Route>
             <Route path="/register">
             <BackgroundSlider images={[ image1, image2,image4,image5,image6,image7 ]}
-          duration={10} transition={1} />
+          duration={10} transition={1}/>
               {state.username===null &&
               <RegistrationForm/>}
               {state.username!==null &&
@@ -74,6 +77,18 @@ function App() {
               <LoginForm/>}
               {state.username!==null &&
               <Projects/>}
+            </Route>
+            <Route path="/scripts">
+              {state.username===null &&
+              <LoginForm/>}
+              {state.username!==null &&
+              <Scripts/>}
+            </Route>
+            <Route path="/platform">
+              {state.username===null &&
+              <NotebookComponent/>}
+              {state.username!==null &&
+              <NotebookComponent/>}
             </Route>
             <Route path="/home">
             <BackgroundSlider images={[ image1, image2,image4,image5,image6,image7 ]}

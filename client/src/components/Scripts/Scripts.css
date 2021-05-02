@@ -1,0 +1,105 @@
+.algo{
+  max-width:21em;
+}
+
+.algo .card {
+    box-shadow: 0 2px 2px 0 rgb(0 0 0 / 20%);
+    transition: 0.3s;
+    /* width: 100%; */
+    border-radius: 5px;
+    padding: 5px 5px;
+    /* padding-bottom: 30px; */
+    opacity: 1;
+    /* cursor: pointer; */
+    min-width: 20em;
+    height: 13em;
+    text-align: center;
+    background-color: #f1f1f1;
+  }
+
+  .algo .card .inner-card{
+    /* background: #f8f9fa;
+     */
+     background-color: #fff;
+    
+     padding: 15px;
+     padding-bottom: 5px;
+    /* width: 15em;
+    height: 15em; */
+    width: -webkit-fill-available;
+    height: -webkit-fill-available;
+  }
+
+  
+.algo .card .inner-card img{
+    width:50px;
+    float:center;
+    /* margin-left: 10px; */
+    
+  }
+  .algo .card .inner-card .algo-details {
+      padding-bottom: 10px;
+    
+  }
+
+
+  .algo-title
+{
+  /* position: fixed; */
+  padding: 15px 15px 10px 15px;
+  text-align: center;
+  /* padding-left: 10px; */
+
+}
+
+.algo-title a:hover
+{
+  /* text-decoration: underline; */
+  color:#000
+
+}
+
+.algo-title span{
+  font-size: 15px !important;
+  font-weight: 500;
+
+}
+.algo-description
+{
+  /* position: fixed; */
+  /* padding-top: 40px; */
+  /* padding-left: 10px; */
+
+  text-align: left;
+
+}
+
+.algo-description span{
+  font-size: 11px !important;
+  color:#6c757d
+}
+
+.algo-description a{
+  font-size: 10px;
+}
+
+.algo-see-example{
+  text-align: left;
+  padding-top: 5px;
+
+}
+.algo-see-example span{
+  font-size: 11px !important;
+  color:#444;
+  font-weight: 500 !important;
+
+}
+.algo-see-example span:hover{
+  color:#444;
+  cursor:pointer;
+  font-size: 13px !important;
+
+}
+.algo-row .column{
+  width:23em !important;
+}

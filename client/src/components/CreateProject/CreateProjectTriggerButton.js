@@ -7,7 +7,7 @@ const Trigger = ({ triggerText, buttonRef, showModal }) => {
     <div className="create-projects hv-center" ref={buttonRef}
     onClick={showModal}>
                         
-            <div>
+            {/* <div> */}
               <div className="mt-5 card hv-center">
                   <div className="inner-card">
                       <img src={project_logo} alt=""/>
@@ -16,7 +16,7 @@ const Trigger = ({ triggerText, buttonRef, showModal }) => {
                       </div>
                   </div>
               </div>
-            </div>
+            {/* </div> */}
       {triggerText}
 
         </div>

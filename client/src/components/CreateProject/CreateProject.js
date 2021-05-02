@@ -79,6 +79,8 @@ function CreateProject(props) {
           // setState({errors: state.errors, newProject:data.new_project, success:data.success});
 
           console.log("Success---",state);
+          window.location.reload();
+
 
         }).catch(err => console.log(err));
   

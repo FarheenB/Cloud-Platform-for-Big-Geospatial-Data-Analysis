@@ -147,15 +147,15 @@ def create_project():
 def get_projects():
     if request.method == "GET":
         username=request.args.get('username');      
-        print("----------",username);
+        # print("----------",username);
 
         try:
             projects_records = Project_Records.query.filter(Project_Records.created_by==username).all()
-            print("**----------",projects_records);
+            # print("**----------",projects_records);
             projects=[]
 
             for row in projects_records:
-                print(row)
+                # print(row.id)
                 projects.append({
                     'project_id':row.id,
                     'title':row.title,
@@ -167,7 +167,7 @@ def get_projects():
 
 
                     })
-                print(projects)
+                # print(projects)
             return {
                 'projects': projects
             }
@@ -175,20 +175,22 @@ def get_projects():
         except:
             raise Exception()
 
-# @app.route("/delete_project", methods=["DELETE"])
-# def delete_project():
-    # if request.method == "GET":
-    #     project_id=request.args.get('project_id');      
-    #     print("----------",project_id);
+@app.route("/delete_project", methods=["DELETE"])
+def delete_project():
+    if request.method == "DELETE":
+        project_id=request.args.get('project_id');      
+        print("----------",project_id);
 
-    #     try:
-    #         Project_Records.query.filter(Project_Records.id==project_id).delete()
-    #         return {
-    #             'success': true
-    #         }
+        try:
+            Project_Records.query.filter(Project_Records.id==project_id).delete()
+            db.session.commit()
+            
+            return {
+                'success': True
+            }
                             
-    #     except:
-    #         raise Exception()
+        except:
+            raise Exception()
     # print("Deleted");
 
 

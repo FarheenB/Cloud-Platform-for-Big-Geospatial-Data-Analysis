@@ -19,7 +19,7 @@ class Projects extends React.Component {
     }
 
     getData(){
-        let username=localStorage.getItem('username');
+        let username=sessionStorage.getItem('username');
 
         axios.get('/get_projects?username='+username).then(res => {
             let data = res.data
@@ -28,31 +28,35 @@ class Projects extends React.Component {
     }
     
     componentDidMount(){
-        this.getData()
+        this.getData();
     }
 
     deleteProject(project_id){
-        // fetch('/delete_project?project_id='+project_id, { method: 'DELETE' })
-        // .then(() => this.setState({ status: 'Deleted successful' }));
+        console.log(project_id);
+        fetch('/delete_project?project_id='+project_id, { method: 'DELETE' })
+        .then(() => this.setState({ status: 'Deleted successful' }));
+
+        window.location.reload();
+
     }
 
     render(){
-        console.log("inside Project", this.state);
+        console.log("inside Project", this.state.projects);
 
         return(
-            <div class="row">
-                <div class="column "> 
-                    <div className="create-projects hv-center">                    
+            <div class="projects-row row">
+                <div class="column hv-center"> 
+                    {/* <div className="create-projects hv-center">                     */}
                         <a>
                             <CreateProject/>
                         </a>
-                    </div>
+                    {/* </div> */}
                 </div>
                 {
                     this.state.projects.map(project => (       
-                    <div class="column">           
+                    <div class="column hv-center">           
                         <div className="projects hv-center">
-                           
+                            <a>
                                 <div className="mt-5 card">
                                     <div className="inner-card">
                                         <div className="projects-details">
@@ -80,9 +84,11 @@ class Projects extends React.Component {
                                         <span><a href="/project">{project.title}</a></span>
                                         </div>
                                         <div className="project-description">
-                                        <span>{project.description.substr(0,70)}
-                                        {project.description.length>100 &&
-                                        <span>...<a href="">Read More</a></span>
+                                        <span>{project.description.substr(0,60)}
+                                        {project.description.length>60 &&
+                                        <span>...
+                                            {/* <a href="">Read More</a> */}
+                                            </span>
                                         }
                                         
                                         </span>
@@ -91,12 +97,17 @@ class Projects extends React.Component {
 
                                         </div>
                                     </div>
-                                    <div><a href=""><i onClick={this.deleteProject(project.id)} class="fa fa-trash-o" aria-hidden="true"/></a>
-                                    <a href=""><i class="fa fa-share-alt" aria-hidden="true"/></a>
+                                    <div className="project-footer">
+                                        <span onClick={()=>this.deleteProject(project.project_id)}>
+                                        
+                                            <i class="fa fa-trash-o" aria-hidden="true"/></span>
+                                        <span>
+                                            <i class="fa fa-share-alt" aria-hidden="true"/>
+                                        </span>
                                     </div> 
 
                                 </div>
-                          
+                          </a>
                         </div>
 
                     </div>

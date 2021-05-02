@@ -11,15 +11,17 @@
     background: #e9ecefcc;
     padding: 30px;
     border: 1px solid;
-    border-top-color: rgba(255,255,255,.4);
+    /* border-top-color: rgba(255,255,255,.4);
     border-left-color: rgba(255,255,255,.4);
     border-bottom-color: rgba(60,60,60,.4);
-    border-right-color: rgba(60,60,60,.4);
+    border-right-color: rgba(60,60,60,.4); */
+    border-color:rgba(255,255,255,.4);
+
 }
 
 .login .login-title{
     /* margin-bottom: 10px; */
-    font-size: 32px;
+    font-size: 25px;
 	font-weight: 600;
 	padding-bottom: 10px;
 	text-align: center;

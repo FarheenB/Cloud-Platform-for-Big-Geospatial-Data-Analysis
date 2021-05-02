@@ -1,11 +1,12 @@
-html,body{font-family:"Google Sans","Roboto",sans-serif;margin:0;overflow-x:hidden;padding:0;-webkit-font-smoothing:antialiased;font-size: 14px;
+html,body{font-family:Trebuchet,"Roboto",sans-serif;margin:0;overflow-x:hidden;padding:0;-webkit-font-smoothing:antialiased;font-size: 14px;
 }
 body{
     background-color: #ced4da!important;
 line-height: 1.15;
+color:#444;
 
 }
-h1,h2,h3{font-family:"Google Sans Display","Roboto",sans-serif;color:#444;font-weight:400}
+h1,h2,h3{font-family:Trebuchet,"Roboto",sans-serif;color:#444;font-weight:400}
 h2{font-size:28px;color:#444;font-weight:400}
 h4{font-size:24px;color:#444;font-weight:400}
 p{line-height:1.5em;color:#424242;font-size:13px;font-weight:400}
@@ -27,9 +28,9 @@ span{
 }
 @media only screen and (max-width: 481px){p{font-size:18px}}sup{line-height:1em}
 /* a{color:#4285f4;text-decoration:none;font-weight:500} */
-blockquote::before{color:#424242;content:'“';font-family:Georgia, serif;font-size:6rem;font-weight:300;left:0;position:absolute;right:0;top:60px}
+blockquote::before{color:#424242;content:'“';font-family:Trebuchet, serif;font-size:6rem;font-weight:300;left:0;position:absolute;right:0;top:60px}
 @media only screen and (max-width: 1081px){blockquote::before{top:45px}}@media only screen and (max-width: 481px){blockquote::before{font-size:4rem}}figure blockquote{font-size:24px;font-weight:200;line-height:1.5em;margin:0 auto;text-align:center}@media only screen and (max-width: 481px){figure blockquote{font-size:18px}}figure blockquote+figcaption{font-size:24px;font-style:italic;font-weight:200;margin-top:20px;text-align:center}@media only screen and (max-width: 481px){figure blockquote+figcaption{font-size:18px}}.main{padding-top:54px;padding-bottom:150px}.right{float:right}.hidden{display:none}@media only screen and (max-width: 481px){.mobile-show{display:block}}@media only screen and (max-width: 481px){.mobile-hide{display:none}}.title{color:#fff;font-size:48px;margin:0;padding:60px 120px;text-align:center;font-weight:bold}.title h1{font-size:72px;font-weight:300;color:#fff}@media only screen and (max-width: 481px){.title{padding:60px 0}.title h1{font-size:54px}}body{min-height:100%}.content-wrapper{display:-ms-flexbox;display:flex;min-height:100%;-ms-flex-direction:column;flex-direction:column}.main{-ms-flex:1;flex:1}
-a{text-decoration: none;color:#000}
+a{text-decoration: none;color:#444}
 a:hover{opacity:1; text-decoration: none;color:#424242}
 
 header{background-color:#fff;box-shadow:0 3px 2px rgba(0,0,0,0.05);height:54px}

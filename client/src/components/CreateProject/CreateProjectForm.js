@@ -4,7 +4,7 @@ export const Form = ({ handleChange, onSubmit, errors, closeModal }) => {
   return (
             
         <form onSubmit={onSubmit}>
-        <div className="login-title">
+        <div className="create-project-title">
                   <h4>CREATE NEW PROJECT</h4>
               </div>
         <div className="form-group">
@@ -27,8 +27,8 @@ export const Form = ({ handleChange, onSubmit, errors, closeModal }) => {
 
           />
         </div>
-        <div className="form-group">
-          <button className="form-control btn btn-primary" type="submit" onClick={errors===""? closeModal:undefined }>
+        <div className="form-group create-project-button">
+          <button className="form-control btn btn-primary" type="submit" >
             Submit
           </button>
         </div>
