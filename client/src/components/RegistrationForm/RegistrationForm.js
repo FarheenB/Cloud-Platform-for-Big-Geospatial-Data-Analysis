@@ -136,7 +136,7 @@ function RegistrationForm(props) {
                 <div className="register-title">
                     <h4>REGISTER</h4>
                 </div>
-                <form className="register-form">
+                <form className="register-form" autoComplete="off">
                     <div className="form-group text-left">
                         <input type="username" 
                             className="form-control" 

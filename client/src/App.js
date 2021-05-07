@@ -7,7 +7,11 @@ import RegistrationForm from './components/RegistrationForm/RegistrationForm';
 import Home from './components/Home/Home';
 import Projects from './components/Projects/Projects';
 import Scripts from './components/Scripts/Scripts';
+import Models from './components/Models/Models';
 import NotebookComponent from './components/NotebookComponent/NotebookComponent'
+import AdminComponent from './components/AdminComponent/AdminComponent';
+import AddScripts from './components/AdminComponent/AddScripts';
+import AddModels from './components/AdminComponent/AddModels';
 
 import CreateProject from './components/CreateProject/CreateProject';
 import PrivateRoute from './utils/PrivateRoute';
@@ -33,15 +37,33 @@ import {
 import AlertComponent from './components/AlertComponent/AlertComponent'; 
 
 function App() {
-  console.log(sessionStorage.getItem("username"));
-  if(localStorage.getItem("username")){
+
+  if(localStorage.getItem('access_token')!==null && localStorage.getItem("access_token")!=="undefined" && localStorage.getItem("rememberMe")){
     sessionStorage.setItem('access_token', localStorage.getItem('access_token'));
     sessionStorage.setItem('refresh_token', localStorage.getItem('refresh_token'));
     sessionStorage.setItem('email', localStorage.getItem('email'));
     sessionStorage.setItem('username', localStorage.getItem('username'));
   }
+
+  // console.log(sessionStorage.getItem("access_token"));
+  let sessionData=sessionStorage.getItem("access_token");
+  let username=sessionData!==null && sessionData!=="undefined" ? sessionStorage.getItem("username"):null;
+
+// ------Admin access
+if(sessionData!==null && sessionData!=="undefined"){
+  if(username==="@FarheenB"){
+    sessionStorage.setItem('admin',true)
+  }
+  else{
+    sessionStorage.setItem('admin',false)
+  }
+}
+
+
+
   const [state , setState] = useState({
-      username:sessionStorage.getItem("username")
+      username:username,
+      admin:sessionStorage.getItem('admin')
   });
 
   return (
@@ -84,6 +106,12 @@ function App() {
               {state.username!==null &&
               <Scripts/>}
             </Route>
+            <Route path="/models">
+              {state.username===null &&
+              <LoginForm/>}
+              {state.username!==null &&
+              <Models/>}
+            </Route>
             <Route path="/platform">
               {state.username===null &&
               <NotebookComponent/>}
@@ -95,6 +123,33 @@ function App() {
           duration={10} transition={1} />
               <Home/>
             </Route>
+
+            {/* Only Admin Access */}
+            <Route path="/admin_">
+              {state.admin &&
+              <AdminComponent/>}
+              {!state.admin &&
+              <div>
+                <span>Access Denied</span>
+              </div>}
+            </Route>
+            <Route path="/admin/add_scripts">
+              {state.admin &&
+              <AddScripts/>}
+              {!state.admin &&
+              <div>
+                <span>Access Denied</span>
+              </div>}
+            </Route>
+            <Route path="/admin/add_models">
+              {state.admin &&
+              <AddModels/>}
+              {!state.admin &&
+              <div>
+                <span>Access Denied</span>
+              </div>}
+            </Route>
+
             {/* <Route path="/create_project">
               <CreateProject/>
             </Route> */}

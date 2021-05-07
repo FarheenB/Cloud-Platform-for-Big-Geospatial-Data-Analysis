@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 import './Projects.css';
-import project_logo from '../../static/images/create-project-logo.png';
 import {API_BASE_URL, ACCESS_TOKEN_NAME} from '../../constants/apiConstants';
 import { withRouter } from "react-router-dom";
 import CreateProject from "../CreateProject/CreateProject"
@@ -56,9 +55,11 @@ class Projects extends React.Component {
                     this.state.projects.map(project => (       
                     <div class="column hv-center">           
                         <div className="projects hv-center">
-                            <a>
                                 <div className="mt-5 card">
+                                <a href="/notebook">
+
                                     <div className="inner-card">
+
                                         <div className="projects-details">
                                             <img src={project_icon} alt=""/>
                                             <div className="project-created-by">
@@ -84,8 +85,8 @@ class Projects extends React.Component {
                                         <span><a href="/project">{project.title}</a></span>
                                         </div>
                                         <div className="project-description">
-                                        <span>{project.description.substr(0,60)}
-                                        {project.description.length>60 &&
+                                        <span>{project.description.substr(0,80)}
+                                        {project.description.length>80 &&
                                         <span>...
                                             {/* <a href="">Read More</a> */}
                                             </span>
@@ -97,6 +98,8 @@ class Projects extends React.Component {
 
                                         </div>
                                     </div>
+                          </a>
+
                                     <div className="project-footer">
                                         <span onClick={()=>this.deleteProject(project.project_id)}>
                                         
@@ -107,7 +110,6 @@ class Projects extends React.Component {
                                     </div> 
 
                                 </div>
-                          </a>
                         </div>
 
                     </div>

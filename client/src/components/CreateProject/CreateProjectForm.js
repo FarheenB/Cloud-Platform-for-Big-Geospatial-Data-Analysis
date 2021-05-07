@@ -1,9 +1,9 @@
 import React from 'react';
 
-export const Form = ({ handleChange, onSubmit, errors, closeModal }) => {
+export const Form = ({ handleChange, onSubmit, errors }) => {
   return (
             
-        <form onSubmit={onSubmit}>
+        <form onSubmit={onSubmit} autoComplete="off">
         <div className="create-project-title">
                   <h4>CREATE NEW PROJECT</h4>
               </div>

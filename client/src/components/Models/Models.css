@@ -1,0 +1,54 @@
+
+.hoverDiv{
+    display: block;
+    background-color: #fff;
+    width:100%;
+    /* height:5em; */
+    padding:2em;
+    /* position :absolute; */
+    z-index: 3;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: -4px -4px 3px #aaaaaa;
+    
+}
+
+.hiddenText {
+    display: none;
+    /* border-bottom: 2px solid white;
+    border-top: 2px solid white; */
+    color: whitesmoke;
+
+ }
+ .hoverDiv:hover{
+    color:gray;
+ }
+
+ .hoverDiv:hover + .hiddenText {
+    display: block;
+    /*
+    font-size: 22px;
+    font-weight: bold; */
+    width:inherit;
+    padding:1em;
+    background-color:#444;
+    border-top: none;
+    /* top: 50px; */
+    /* height: 5em; */
+   
+    
+ }
+
+.models-row .columns{
+    width:25em;
+    display: block!important;
+    /* padding-top:5em;     */
+}
+.models-row .columns div{
+    width:25em;
+    border: solid 1.5px #ced4da;
+}
+
+.models-row .columns .heading{
+    padding:2em;    
+}
