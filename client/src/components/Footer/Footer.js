@@ -5,7 +5,7 @@ import { withRouter } from "react-router-dom";
 import { ACCESS_TOKEN_NAME } from '../../constants/apiConstants';
 function Footer(props) {
     return(
-        <div className="footer">
+        <div className="footer hv-center">
             <span>Developed by @<a href="https://www.linkedin.com/in/farheen-bano/">Farheen</a></span>
         </div>         
     )

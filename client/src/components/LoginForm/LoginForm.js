@@ -117,8 +117,8 @@ function LoginForm(props) {
                  <div className="login-title">
                     <h4>LOGIN</h4>
                  </div>
-                <form className="login-form" > 
-                    <div className="form-group text-left">
+                <form className="login-form" autoComplete="off"> 
+                    <div className="form-group validation">
                     <input type="email" 
                         className="form-control" 
                         id="email" 
@@ -127,10 +127,20 @@ function LoginForm(props) {
                         value={state.email}
                         onChange={handleChange}
                     />
-                    {errors.email.length > 0 && 
-                    <span className='error'>{errors.email}</span>}
                     </div>
-                    <div className="form-group text-left">
+                    <div className='error-control'>
+                        <span className='error'>
+                        {errors.email.length? 
+                            errors.email:"  "
+                        }</span>
+                        <span className='error'>
+                    
+                        {errors.form.length > 0 &&                     
+                            errors.form                    
+                        }
+                        </span>
+                    </div>
+                    <div className="form-group text-left validation">
                     <input type="password" 
                         className="form-control" 
                         id="password" 
@@ -138,9 +148,12 @@ function LoginForm(props) {
                         value={state.password}
                         onChange={handleChange} 
                     />
-                    {errors.password.length > 0 && 
-                    <span className='error'>{errors.password}</span>}
                     </div>
+                    {/* <div className='error-control'>
+                        {errors.password.length? 
+                            errors.password:" "
+                        }
+                    </div> */}
                     <div className="remember-me-checkbox">
                         <input type="checkbox" id="rememberMe" name="remember" value="true" onChange={handleChange} />
                         <label for="remember">Remember me</label>
@@ -159,11 +172,7 @@ function LoginForm(props) {
                     <span className="loginText" onClick={() => redirectToRegister()}>Register</span> 
                 </div>
                 
-                {errors.form.length > 0 && 
-                    <div class="form-error">
-                        <span className='error'>{errors.form}</span>
-                    </div>
-                }
+               
 
                 </form>
          </div>

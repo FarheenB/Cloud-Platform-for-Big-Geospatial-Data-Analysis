@@ -9,7 +9,7 @@
 }
 
 .container-size{
-  min-height: 540px!important;
+    min-height: 35.6em!important;
     min-width: 100% !important;
     /* background: linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.45)),url(/src/static/images/satellite-earth-imaging.png); */
     /* background-position: center;

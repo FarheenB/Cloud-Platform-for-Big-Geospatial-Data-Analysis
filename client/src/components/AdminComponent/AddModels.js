@@ -10,7 +10,7 @@ class AddModels extends React.Component {
             description:"", 
             scriptId:"", 
             scriptsCategories:[],  
-            codeURL:"",
+            // codeURL:"",
             errors:{
               form:""
             },
@@ -33,17 +33,17 @@ class AddModels extends React.Component {
     handleUploadFile(ev) {
         ev.preventDefault();
     
-        const data = new FormData();
-        data.append('file', this.uploadInput.files[0]);
-        let url='/upload?fileType=models'
-        fetch(url, {
-            method: 'POST',
-            body: data
-        }).then( res => res.json())
-        .then(data=>{
-            this.setState({ codeURL: `${data['path']}`});
-            // console.log(`http://localhost:5000/${data['path']}`);
-          });
+        // const data = new FormData();
+        // data.append('file', this.uploadInput.files[0]);
+        // let url='/upload?fileType=models'
+        // fetch(url, {
+        //     method: 'POST',
+        //     body: data
+        // }).then( res => res.json())
+        // .then(data=>{
+        //     this.setState({ codeURL: `${data['path']}`});
+        //     // console.log(`http://localhost:5000/${data['path']}`);
+        //   });
 
     }
 
@@ -55,6 +55,8 @@ class AddModels extends React.Component {
             ...prevState,
             [id] : value
         }))
+        console.log(this.uploadInput.files[0])
+
     }
     
     handleSubmit = (event) => {
@@ -62,6 +64,10 @@ class AddModels extends React.Component {
     
         let url = "/add_model"
         let formData  = new FormData();
+        formData.append('file', this.uploadInput.files[0]);
+
+
+        console.log(this.state)
         let data = this.state;
         for(let name in data) {
             formData.append(name, data[name]);
@@ -107,38 +113,36 @@ class AddModels extends React.Component {
     render() {
         return (
             <div className="login hv-center">
-                <div className="card col-12 col-lg-3 hv-center">
+                <div className="admin-add-card card">
+                    <div className="create-script-title">
+                        <h4>Create New Model</h4>
+                    </div>
+                    <div className="admin-inner-card card col-12 col-lg-3">
                     <form autoComplete="off">
-                        <div className="create-script-title">
-                            <h4>CREATE NEW MODEL</h4>
-                        </div>
-
-
-                        <div className="form-group">
+                         <div className="form-group">
                             <label for="imageFile">Upload code:</label>
-                            <input ref={(ref) => { this.uploadInput = ref; }} type="file" accept=".ipynb, .py"/>
+                            <input ref={(ref) => { this.uploadInput = ref; }} type="file" accept=".ipynb, .py" onChange={this.handleChange}/>
                         </div>
 
-                        <div className="form-group create-script-button">
+                        {/* <div className="form-group create-script-button">
                             <button 
                                 type="submit" 
                                 className="btn btn-primary"
                                 onClick={this.handleUploadFile}
                                 disabled={this.state.codeURL.length>0}
                             >Upload</button>
-                        </div>
-                        <div className="form-group">
+                        </div> */}
+                        {/* <div className="form-group">
                             {this.state.codeURL.length>0 &&
                             <span class='text-success'>Code uploaded successfully</span>
                             }
-                        </div>
+                        </div> */}
 
                         <div className="form-group">
-                            <label for="scriptId">Select script category</label>
+                            {/* <label for="scriptId">Select script category</label> */}
                             
-                            <select name="scriptId" id="scriptId" onChange={this.handleChange} placeholder="Select script category">
-                            <option value='-1'>Select</option>
-                            
+                            <select name="scriptId" id="scriptId" class='form-control' onChange={this.handleChange} placeholder="Select script category">
+                            <option value='-1'>Select script category</option>
                             {
                                 this.state.scriptsCategories.map(script => (  
                                 <option value={script.script_id}>{script.name}</option>
@@ -182,6 +186,7 @@ class AddModels extends React.Component {
                         } 
                     </form>
                 </div>
+            </div>
             </div>
 
         );

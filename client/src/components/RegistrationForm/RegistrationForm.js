@@ -137,7 +137,7 @@ function RegistrationForm(props) {
                     <h4>REGISTER</h4>
                 </div>
                 <form className="register-form" autoComplete="off">
-                    <div className="form-group text-left">
+                    <div className="form-group text-left validation">
                         <input type="username" 
                             className="form-control" 
                             id="username" 
@@ -146,10 +146,15 @@ function RegistrationForm(props) {
                             value={state.username}
                             onChange={handleChange}
                         />
+                    </div>
+                    <div className='error-control'>
+
                         {errors.username.length > 0 && 
                         <span className='error'>{errors.username}</span>}
+                        {errors.form.length > 0 && 
+                        <span className='error'>{errors.form}</span>}                    
                     </div>
-                    <div className="form-group text-left">
+                    <div className="form-group text-left validation">
                         <input type="email" 
                             className="form-control" 
                             id="email" 
@@ -158,10 +163,12 @@ function RegistrationForm(props) {
                             value={state.email}
                             onChange={handleChange}
                         />
+                    </div>
+                    <div className='error-control'>
                         {errors.email.length > 0 && 
                         <span className='error'>{errors.email}</span>}
                     </div>
-                    <div className="form-group text-left">
+                    <div className="form-group text-left validation">
                         <input type="password" 
                             className="form-control" 
                             id="password" 
@@ -169,11 +176,13 @@ function RegistrationForm(props) {
                             value={state.password}
                             onChange={handleChange} 
                         />
+                    </div>
+                    <div className='error-control'>
                         {errors.password.length > 0 && 
                         <span className='error'>{errors.password}</span>}
                         
                     </div>
-                    <div className="form-group text-left">
+                    <div className="form-group text-left validation">
                         <input type="password" 
                             className="form-control" 
                             id="confirmPassword" 
@@ -181,6 +190,8 @@ function RegistrationForm(props) {
                             value={state.confirmPassword}
                             onChange={handleChange} 
                         />
+                    </div>
+                    <div className='error-control'>
                         {errors.confirmPassword.length > 0 && 
                     <span className='error'>{errors.confirmPassword}</span>}
                     </div>
@@ -196,10 +207,7 @@ function RegistrationForm(props) {
                     <span>Already have an account? </span>
                     <span className="loginText" onClick={() => redirectToLogin()}>Login here</span> 
                 </div>
-                {errors.form.length > 0 && 
-                    <div class="form-error">
-                    <span className='error'>{errors.form}</span>
-                    </div>}
+
                 </form>
             </div>    
         </div>

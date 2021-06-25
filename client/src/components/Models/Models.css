@@ -1,10 +1,19 @@
+.models{
+    width:100%;
+}
+.models .heading{
+    /* padding:10px; */
+    /* padding-bottom: 0px; */
+  }
 
 .hoverDiv{
     display: block;
-    background-color: #fff;
-    width:100%;
+    /* background-color: #fff;
+     */
+     background: radial-gradient(ellipse at center,#ced4da 0,#fff 100%);
+     width:100%;
     /* height:5em; */
-    padding:2em;
+    padding:20px;
     /* position :absolute; */
     z-index: 3;
     cursor: pointer;
@@ -12,6 +21,7 @@
     box-shadow: -4px -4px 3px #aaaaaa;
     
 }
+
 
 .hiddenText {
     display: none;
@@ -21,7 +31,8 @@
 
  }
  .hoverDiv:hover{
-    color:gray;
+    color:#000;
+    background: #fff;
  }
 
  .hoverDiv:hover + .hiddenText {
@@ -45,7 +56,8 @@
     /* padding-top:5em;     */
 }
 .models-row .columns div{
-    width:25em;
+    /* width:25em; */
+    width:100%;
     border: solid 1.5px #ced4da;
 }
 

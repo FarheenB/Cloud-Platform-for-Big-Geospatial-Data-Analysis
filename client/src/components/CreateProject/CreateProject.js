@@ -26,17 +26,25 @@ function CreateProject(props) {
   const onSubmit = (event) => {
     event.preventDefault(event);
     console.log("Event----",event);
-    // console.log(event.target.description.value);
+    console.log(event.target.description.value);
     let title=event.target.title.value;
     let description=event.target.description.value;
+    if(description==='')
+      description=null;
     let username=sessionStorage.getItem('username');
+    let script_name=null;
+    let modelURL=null;
+    let datasetURL=null;
 
-      let url = "/create_project"
-      let formData  = new FormData();
-      let data={
+    let url = "/create_project"
+    let formData  = new FormData();
+    let data={
       "title": title,
       "description": description,
-      "username": username
+      "username": username,
+      "script_name":script_name,
+      "modelURL":modelURL,
+      "datasetURL":datasetURL
     };
 
    
@@ -68,19 +76,23 @@ function CreateProject(props) {
         .then(data=>{
           // console.log("data",data);
           if(!data.success)
-            state.errors="Invalid entry";
-            state.newProject=data.new_project;
+            state.errors=data.error;
+          else{
+            state.newProject=data.project;
             state.success=data.success;
+            console.log("Success---",state);
+            window.location.reload();
+            
+          }
+
           const {id , value} = event.target   
             setState(prevState => ({
                 ...prevState,
                 [id] : value
             }))
-          // setState({errors: state.errors, newProject:data.new_project, success:data.success});
+            // setState({errors: state.errors, newProject:data.new_project, success:data.success});
 
-          console.log("Success---",state);
-          window.location.reload();
-
+            
 
         }).catch(err => console.log(err));
   

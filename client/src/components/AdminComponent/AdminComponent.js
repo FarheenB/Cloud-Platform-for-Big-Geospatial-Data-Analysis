@@ -9,6 +9,7 @@ class AdminComponent extends React.Component {
             users:[],
             scripts:[],
             models:[],
+            projects:[],
             status:""
         };
     }
@@ -29,7 +30,10 @@ class AdminComponent extends React.Component {
             this.setState({models : data.models})
         })
 
-
+        axios.get('/get_projects').then(res => {
+            let data = res.data
+            this.setState({projects : data.projects})
+        })
     }
     
     componentDidMount(){
@@ -63,9 +67,27 @@ class AdminComponent extends React.Component {
 
     }
 
+    deleteProject(project_id){
+        console.log(project_id);
+        
+        fetch('/delete_project?project_id='+project_id, { method: 'DELETE' })
+        .then( res => res.json())
+        .then(data=>{
+            console.log("data",data);
+            if(!data.success)
+                alert("Project cannot be deleted because the folder or a file in it is open.")
+            else{
+                this.setState({ status: 'Deleted successful' })
+                window.location.reload();
+            }
+                
+            }
+        )
+    }
+
     render(){
         return(
-            <div>
+            <div class="admin">
             <div class="row admin-page hv-center">
                 <div class="col-lg-6 col-md-12">
                     <div class="admin-card card">
@@ -200,6 +222,58 @@ class AdminComponent extends React.Component {
                             >Add Model</button></a>
                     </div>
                 </div>
+
+                <div class="row admin-page hv-center">
+                <div class="col-md-12">
+                    <div class="admin-card card">
+                        <div class="card-header card-header-info">
+                        <h4 class="card-title">Projects</h4>
+                        <p class="card-category">All the projects created on this platform</p>
+                        </div>
+                        <div class="card-body table-responsive">
+                            <table class="table table-hover">
+                                <thead class="text-info">
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Title</th>
+                                        <th scope="col">Description</th>
+                                        <th scope="col">Script</th>
+                                        <th scope="col">Model</th>
+                                        <th scope="col">Project</th>
+                                        <th scope="col">Dataset</th>
+                                        <th scope="col">Created by</th>
+                                        <th scope="col">Created on</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {
+                                this.state.projects.map(project => (     
+                                    <tr>
+                                        <th scope="row">{project.project_id}</th>
+                                        <td>{project.title}</td>
+                                        <td>{project.description}</td>
+                                        <td>{project.script}</td>
+                                        <td>{project.model}</td>
+                                        <td>{project.model_loc}</td>
+                                        <td>{project.dataset_loc}</td>
+                                        <td>{project.created_by}</td>
+                                        <td>{project.created_on}</td>
+                                        <td>
+                                            <button type="button" class="btn btn-danger btn-sm px-3" onClick={()=>this.deleteProject(project.project_id)}>
+                                                <i class="fa fa-times"/>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    ))
+                                }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
             </div>
             </div>
         );

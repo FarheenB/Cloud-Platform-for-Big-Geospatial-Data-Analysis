@@ -1,5 +1,13 @@
+.scripts{
+  width:100%;
+}
+.scripts .heading{
+  /* padding:10px; */
+  /* padding-bottom: 0px; */
+}
+
 .algo{
-  max-width:21em;
+  max-width:20em;
 }
 
 .algo .card {
@@ -10,11 +18,16 @@
     padding: 5px 5px;
     /* padding-bottom: 30px; */
     opacity: 1;
-    /* cursor: pointer; */
+    cursor: pointer;
     min-width: 20em;
     height: 13em;
     text-align: center;
     background-color: #f1f1f1;
+  }
+
+  .algo .card a{
+    width:100%;
+    height:100%;
   }
 
   .algo .card .inner-card{
@@ -26,15 +39,15 @@
      padding-bottom: 5px;
     /* width: 15em;
     height: 15em; */
-    width: -webkit-fill-available;
-    height: -webkit-fill-available;
+    width: 100%;
+    height: 100%;
   }
 
   
 .algo .card .inner-card img{
     width:50px;
     float:center;
-    /* margin-left: 10px; */
+    margin-top: 2px;
     
   }
   .algo .card .inner-card .algo-details {
@@ -51,6 +64,7 @@
   /* padding-left: 10px; */
 
 }
+
 
 .algo-title a:hover
 {
@@ -71,6 +85,9 @@
   /* padding-left: 10px; */
 
   text-align: left;
+  height:32px;
+  
+  
 
 }
 
@@ -102,4 +119,10 @@
 }
 .algo-row .column{
   width:23em !important;
+  padding:0px;
+}
+
+
+.skip{
+  cursor:pointer;
 }

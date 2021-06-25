@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { Modal } from './CreateProjectModal';
 import TriggerButton from './CreateProjectTriggerButton';
 export class Container extends Component {
-  state = { isShown: false };
+  state = { isShown: false};
   showModal = () => {
-    this.setState({ isShown: true }, () => {
+    this.setState({ isShown: true}, () => {
       this.closeButton.focus();
     });
     this.toggleScrollLock();
@@ -13,6 +13,8 @@ export class Container extends Component {
     this.setState({ isShown: false });
     this.TriggerButton.focus();
     this.toggleScrollLock();
+    // this.setState({ validation: "" });
+    // this.props.errors="";
   };
   onKeyDown = (event) => {
     if (event.keyCode === 27) {

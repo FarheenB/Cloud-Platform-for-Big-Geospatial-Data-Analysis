@@ -5,7 +5,7 @@ class AddScripts extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            imageURL: "",
+            // imageURL: "",
             name:"",
             description:"",    
             errors:{
@@ -19,17 +19,17 @@ class AddScripts extends React.Component {
     handleUploadImage(ev) {
         ev.preventDefault();
     
-        const data = new FormData();
-        data.append('file', this.uploadInput.files[0]);
-        let url='/upload?fileType=images'
-        fetch(url, {
-            method: 'POST',
-            body: data
-        }).then( res => res.json())
-        .then(data=>{
-            this.setState({ imageURL: `${data['path']}`});
-            // console.log(`http://localhost:5000/${data['path']}`);
-          });
+    //     const data = new FormData();
+    //     data.append('file', this.uploadInput.files[0]);
+    //     let url='/upload?fileType=images'
+    //     fetch(url, {
+    //         method: 'POST',
+    //         body: data
+    //     }).then( res => res.json())
+    //     .then(data=>{
+    //         this.setState({ imageURL: `${data['path']}`});
+    //         // console.log(`http://localhost:5000/${data['path']}`);
+    //       });
 
       }
 
@@ -48,6 +48,11 @@ class AddScripts extends React.Component {
     
         let url = "/add_script"
         let formData  = new FormData();
+        formData.append('file', this.uploadInput.files[0]);
+
+        console.log(formData)
+
+        console.log(this.state)
         let data = this.state;
         for(let name in data) {
             formData.append(name, data[name]);
@@ -95,17 +100,19 @@ class AddScripts extends React.Component {
     render() {
         return (
             <div className="login hv-center">
-                <div className="card col-12 col-lg-3 hv-center">
-                    <form autoComplete="off">
-                        <div className="create-script-title">
-                            <h4>CREATE NEW SCRIPT</h4>
-                        </div>
+                <div className="admin-add-card card">
+                    <div className="create-script-title">
+                        <h4>Create New Script</h4>
+                    </div>
+                    <div className="admin-inner-card card col-12 col-lg-3">
+
+                    <form autoComplete="off">                       
                         <div className="form-group">
                             <label for="imageFile">Upload script logo:</label>
                             <input ref={(ref) => { this.uploadInput = ref; }} type="file" accept=".jpg, .jpeg, .png"/>
                         </div>
 
-                        <div className="form-group create-script-button">
+                        {/* <div className="form-group create-script-button">
                             <button 
                                 type="submit" 
                                 className="btn btn-primary"
@@ -117,7 +124,7 @@ class AddScripts extends React.Component {
                             {this.state.imageURL.length>0 &&
                             <img src={"../"+this.state.imageURL} alt="img" class="logo-upload"/>
                             }
-                        </div>
+                        </div> */}
 
 
                         <div className="form-group">
@@ -155,6 +162,7 @@ class AddScripts extends React.Component {
                         } 
                     </form>
                 </div>
+            </div>
             </div>
 
         );

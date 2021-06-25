@@ -1,37 +1,48 @@
-.admin-page{
-  /* width:100%; */
+.admin{
+  width:100%;
   /* background-color: #000; */
 }
 
 .create-script-title{
-    padding: 0px 0px 10px 0px;
-       text-align: center;
+  /* margin-left: 0px;
+  margin-right: 0px; */
+  /* float:left; */
+  text-align: left!important;
+  background-color: #fff;
+  /*display: block;
+  width:100%; */
+  /* background-color: #fff; */
+  border-bottom: solid 1px #fff;
+  /* background-color: #fff!important; */
+}
 
-  }
-  .create-script-title h4{
-   font-size: 20px !important;
-   /* font-weight: 600; */
-   /* padding-bottom: 10px; */
-   text-align: center;
+.create-script-title h4{
+  font-size: 20px !important;
+  font-weight: 400 !important;
+  /* padding-bottom: 10px; */
+  /* text-align: center!important; */
+  padding-left:30px;
+  padding-top:15px;
+  padding-bottom:10px;
 
-  }
+}
 
   /* .create-script-button{
     margin-bottom: 0px !important;
   } */
 
-  .logo-upload{
-      width: 80px;
-      height:80px;
-      /* padding:5px; */
-      margin-bottom: 10px;
-  }
+.logo-upload{
+  width: 80px;
+  height:80px;
+  /* padding:5px; */
+  margin-bottom: 10px;
+}
 
-  .logo-display{
-    width: 40px;
-    height:40px;
-    /* padding:5px; */
-    margin-bottom: 10px;
+.logo-display{
+  width: 40px;
+  height:40px;
+  /* padding:5px; */
+  margin-bottom: 10px;
 }
 
 .admin-page table{
@@ -40,9 +51,31 @@
 
 .admin-card{
   margin:15px;
+  /* width:100%; */
 }
 
 .admin-btn{
   width:min-content !important;
   margin-bottom: 25px;
+}
+
+.admin-add-card{
+  padding-left:0px!important;
+  padding-right:0px!important;
+  padding-bottom:0px!important;
+  padding-top:0px!important;
+}
+
+.admin-inner-card{
+  border: solid 0px!important;
+  background-color: none!important;
+  /* min-height: 380px !important; */
+}
+
+.create-script-title{
+
+}
+
+.admin-add-card {
+  background-color: #fff!important;
 }

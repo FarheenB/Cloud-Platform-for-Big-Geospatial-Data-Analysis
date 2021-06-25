@@ -8,6 +8,11 @@ import Home from './components/Home/Home';
 import Projects from './components/Projects/Projects';
 import Scripts from './components/Scripts/Scripts';
 import Models from './components/Models/Models';
+import UploadDataset from './components/UploadDataset/UploadDataset';
+import SelectTarget from './components/SelectTarget/SelectTarget';
+import StartModel from './components/StartModel/StartModel';
+
+
 import NotebookComponent from './components/NotebookComponent/NotebookComponent'
 import AdminComponent from './components/AdminComponent/AdminComponent';
 import AddScripts from './components/AdminComponent/AddScripts';
@@ -32,8 +37,10 @@ import image7 from './static/images/satellite-sprawling-imaging.png'
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
+  Redirect
 } from "react-router-dom";
+
 import AlertComponent from './components/AlertComponent/AlertComponent'; 
 
 function App() {
@@ -51,7 +58,7 @@ function App() {
 
 // ------Admin access
 if(sessionData!==null && sessionData!=="undefined"){
-  if(username==="@FarheenB"){
+  if(username==="Admin"){
     sessionStorage.setItem('admin',true)
   }
   else{
@@ -84,7 +91,7 @@ if(sessionData!==null && sessionData!=="undefined"){
               {state.username===null &&
               <RegistrationForm/>}
               {state.username!==null &&
-              <Home/>}
+              <Redirect to='/home'  />}
             </Route>
             <Route path="/login">
             <BackgroundSlider images={[ image1, image2,image4,image5,image6,image7 ]}
@@ -92,29 +99,53 @@ if(sessionData!==null && sessionData!=="undefined"){
               {state.username===null &&
               <LoginForm/>}
               {state.username!==null &&
-              <Home/>}
+              <Redirect to='/home'  />}
             </Route>
             <Route path="/projects">
               {state.username===null &&
-              <LoginForm/>}
+              <Redirect to='/login'  />}
               {state.username!==null &&
               <Projects/>}
             </Route>
             <Route path="/scripts">
               {state.username===null &&
-              <LoginForm/>}
+              <Redirect to='/login'  />}
               {state.username!==null &&
               <Scripts/>}
             </Route>
             <Route path="/models">
               {state.username===null &&
-              <LoginForm/>}
+              <Redirect to='/login'  />}
               {state.username!==null &&
               <Models/>}
             </Route>
+            <Route path="/upload_dataset">
+              {state.username===null &&
+              <Redirect to='/login'  />}
+              {state.username!==null &&
+              <UploadDataset/>}
+            </Route>
+            <Route path="/select_target">
+              {state.username===null &&              
+              <Redirect to='/login'  />}
+              {state.username!==null &&
+              <SelectTarget/>}
+            </Route>
+            <Route path="/start_model">
+              {state.username===null &&              
+              <Redirect to='/login'  />}
+              {state.username!==null &&
+              <StartModel/>}
+            </Route>
+            <Route path="/notebook">
+              {state.username===null &&
+              <Redirect to='/login'  />}
+              {state.username!==null &&
+              <NotebookComponent/>}
+            </Route>
             <Route path="/platform">
               {state.username===null &&
-              <NotebookComponent/>}
+              <Redirect to='/login'  />}
               {state.username!==null &&
               <NotebookComponent/>}
             </Route>

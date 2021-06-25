@@ -24,6 +24,10 @@ export const Modal = ({
         onKeyDown={onKeyDown}
       >
         <div className="modal-area" ref={modalRef}>
+          
+          <div className="create-script-title">
+            <h4>Create New Model</h4>
+          </div>
           <button
             ref={buttonRef}
             aria-label="Close Modal"
@@ -32,12 +36,13 @@ export const Modal = ({
             onClick={closeModal}
           >
             <span id="close-modal" className="_hide-visual">
-              Close
+                Close
             </span>
             <svg className="_modal-close-icon" viewBox="0 0 40 40">
               <path d="M 10,10 L 30,30 M 30,10 L 10,30" />
             </svg>
           </button>
+          
           <div className="modal-body">
             <Form handleChange={handleChange} onSubmit={onSubmit} errors={errors} closeModal={closeModal}/>
           </div>

@@ -2,33 +2,30 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import {API_BASE_URL, ACCESS_TOKEN_NAME} from '../../constants/apiConstants';
 import { withRouter } from "react-router-dom";
-import CreateProject from "../CreateProject/CreateProject"
-import project_icon from "../../static/images/project-icon.png"
-import { format } from 'date-fns'
-import { Date } from 'prismic-reactjs';
-import queryString from 'query-string';
 import './Models.css';
+import ProgressBar from '../ProgressbarComponent/ProgressbarComponent';
+import queryString from 'query-string';
 
 class Models extends React.Component {
     constructor(props) {
         super(props);
         this.state={
             models:[],
-            status:""
+            script:""
         };
         console.log("In model");
+        this.handleSkip = this.handleSkip.bind(this)
+
 
     }
 
     getData(){
         console.log(this.props.location.search);
-        let search=this.props.location.search;
-        let query=queryString.parse(search)
-        console.log(query.script);
+        let script_id=sessionStorage.getItem("U_script_id");
 
-        axios.get('/get_models_by_scriptName?script='+query.script).then(res => {
+        axios.get('/get_models_by_scriptId?script_id='+script_id).then(res => {
             let data = res.data
-            this.setState({models : data.models})
+            this.setState({models : data.models, script:script_id})
         })
     }
     
@@ -36,23 +33,45 @@ class Models extends React.Component {
         this.getData();
     }
 
+    handleSubmit(model_id, model_name){
+        sessionStorage.setItem("U_model_id",model_id);
+
+        let search=this.props.location.search;
+        let query=queryString.parse(search);
+        this.props.history.push("upload_dataset/?script="+query.script+"&model="+model_name);
+    }
+
+    handleSkip(){ 
+        sessionStorage.setItem("U_model_id",null);
+        this.props.history.push("/upload_dataset");
+    }
+    
     render(){
         console.log("inside Model", this.state.models);
 
         return(
-            <div class="models-row row hv-center">
-                <div class="columns hv-center"> 
-                <div class="heading"><h4>Select an algorithm</h4></div>
-                {
-                    this.state.models.map(model => ( 
-                    <div>
-                        
-                        <div class="hoverDiv hv-center" >{model.name}</div>
-                        <div class="hiddenText">{model.description}</div>
-                    </div>))
-                }
+            <div class="autoML models">
+                <ProgressBar active='2' handleSkip={this.handleSkip}/>
+                <div class="heading hv-center">
+                    <span>
+                        <h4>SELECT AN ALGORITHM</h4>
+                    </span>
                 </div>
-            </div>         
+            
+                <div class="models-row row hv-center">
+                    <div class="columns hv-center mt-4"> 
+                    {
+                        this.state.models.map(model => ( 
+                        <div onClick={()=>this.handleSubmit(model.model_id,model.name)}>
+                            {/* <a href={"/upload_dataset?script="+this.state.script+"&model="+model.name}> */}
+                            <div class="hoverDiv hv-center" >{model.name}</div>
+                            <div class="hiddenText">{model.description}</div>
+                            {/* </a> */}
+                        </div>))
+                    }
+                    </div>
+                </div>                      
+            </div>     
         );
     }
 }

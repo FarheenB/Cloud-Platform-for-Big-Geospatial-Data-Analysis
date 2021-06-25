@@ -50,7 +50,7 @@ class NavBar extends React.Component {
                     {/* <li className="tab "> <a href="/faq">FAQ</a>  </li>                 */}
                     <li className="tab "> <a href="/dataset">Dataset</a>  </li>                
                     <li className="tab "> <a href="/case_studies">Case Studies</a>  </li>   
-                    <li className="tab "> <a href="/scripts">Scripts</a>  </li>    
+                    {/* <li className="tab "> <a href="/scripts">Scripts</a>  </li>     */}
                     <li className="tab "> <a href="/platform">Platform</a> </li>
                     <li className="tab "> <a href="/projects">Projects</a> </li>
 

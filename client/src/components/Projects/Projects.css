@@ -2,19 +2,6 @@
   width:100%;
 }
 
-.project-card {
-    min-height: 40vh;
-}
-
-.project-margin{
-    min-height: 5vh;
-}
-
-.create-projects{
-  /* width:30em;
-  height:30em; */
-
-}
 .create-projects .card {
     box-shadow: 0 2px 2px 0 rgb(0 0 0 / 20%);
     transition: 0.3s;
@@ -23,8 +10,8 @@
     padding: 5px 5px;
     opacity: 0.7;
     cursor: pointer;
-    min-width: 18em;
-    height: 13em;
+    min-width: 18rem;
+    height: 13rem;
     text-align: center;
     background-color: #f1f1f1;
   }
@@ -37,8 +24,8 @@
     /* padding-bottom: 30px; */
     opacity: 1;
     /* cursor: pointer; */
-    min-width: 18em;
-    height: 13em;
+    min-width: 18rem;
+    height: 13rem;
     text-align: center;
     background-color: #f1f1f1;
   }
@@ -73,6 +60,8 @@
 .projects .card a{
   width:100%;
   height:100%;
+
+
 }
 .projects .card .inner-card{
   /* background: #f8f9fa;
@@ -85,6 +74,8 @@
   height: 15em; */
   width: 100%;
   height: 100%;
+  cursor: pointer;
+
 }
 
 
@@ -101,8 +92,9 @@
   /* margin-left: 10px; */
   
 }
-.projects .card .inner-card .project-details {
-    padding-bottom: 10px;
+.projects .card .inner-card .projects-details {
+    /* padding-bottom: 10px; */
+    height:6em;
   
 }
 .project-created-by{
@@ -121,14 +113,19 @@
 
 .project-time span{
   font-size: 11px !important;
+  text-align: left;
 }
 
 .project-title
 {
   /* position: fixed; */
-  padding-top: 25px;
+  /* padding-top: 25px; */
   text-align: left;
   /* padding-left: 10px; */
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
 
 }
 
@@ -147,7 +144,14 @@
   /* position: fixed; */
   /* padding-top: 40px; */
   /* padding-left: 10px; */
-
+  /* overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis; */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
   text-align: left;
 
 }
@@ -170,16 +174,20 @@
     font-weight: 500; 
   }
 
- 
+  .projects-row {
+  }
   .projects-row .column {
-    float: left;
-    width: 19em !important;
+    width: 19rem !important;
     padding: 0 10px;
+    /* float:left!important; */
+
   }
   
   /* Remove extra left and right margins, due to padding */
-  .row {margin: 0 -5px;
+  .row {
+    /* margin: 0 -5px; */
     width: 100%;
+
   }
   
   /* Clear floats after the columns */
@@ -189,15 +197,18 @@
     clear: both;
   }
   
-  .project-footer:hover{
+  .project-footer span{
     cursor:pointer
   }
   /* Responsive columns */
   @media screen and (max-width: 800px) {
    .row .column {
       /* width: 100%; */
+      width: 19rem !important;
+
       display: block;
       margin-bottom: 20px;
+
     }
   }
   

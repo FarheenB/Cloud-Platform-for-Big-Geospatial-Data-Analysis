@@ -5,8 +5,9 @@
 }
 
 .register{
-    min-height: 540px;
+    /* min-height: 540px; */
     min-width:350px !important;
+    margin:auto;
 }
 
 .register .card {
@@ -73,6 +74,3 @@
     font-size: 12px !important;
 }
 
-.form-control{
-    border: 1px solid #8B90AA !important;
-}

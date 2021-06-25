@@ -66,7 +66,7 @@
     position: relative; */
     margin: 0 auto;
     background: #e9ecef;
-    padding: 30px;
+    padding: 0px;
     border: 1px solid;
     /* border-top-color: rgba(255,255,255,.4);
     border-left-color: rgba(255,255,255,.4); */
@@ -82,7 +82,7 @@
       top: 50%;
       height: auto;
       transform: translate(-50%, -50%);
-      max-width: 35em;
+      max-width: 30em;
       max-height: calc(100% - 1em);
     }
   }
@@ -93,7 +93,7 @@
     right: 0;
     padding: 1px;
     line-height: 1;
-    background: #e9ecef;
+    background: #fff;
     border: 0;
     box-shadow: 0;
     cursor: pointer;
@@ -120,7 +120,7 @@
     /* border: 1px solid #ca3b27; */
     font-size: 20px;
     stroke: #212529;
-    stroke-width: 6;
+    stroke-width: 1;
 
   }
 
@@ -130,6 +130,8 @@
   
   .modal-body {
     /* padding-top: 0.25em; */
+    padding: 30px;
+
   }
   ._hide-visual {
     border: 0 !important;
@@ -164,3 +166,6 @@
    .create-project-button{
      margin-bottom: 0px !important;
    }
+
+
+

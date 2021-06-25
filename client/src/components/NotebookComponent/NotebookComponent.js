@@ -1,53 +1,62 @@
-// import * as enchannelBackend from 'enchannel-notebook-backend';
-// import { Notebook, createStore } from 'react-notebook'
- 
+import React, {useState, useEffect} from 'react';
+import axios from 'axios';
+import {API_BASE_URL, ACCESS_TOKEN_NAME} from '../../constants/apiConstants';
+import { withRouter } from "react-router-dom";
+import CreateProject from "../CreateProject/CreateProject"
+import project_icon from "../../static/images/project-icon.png"
+import { format } from 'date-fns'
+import { Date } from 'prismic-reactjs';
+// import './Models.css';
+import ProgressBar from '../ProgressbarComponent/ProgressbarComponent';
+// import MarkdownRender from './MarkdownRender';
 
-// function NotebookComponent(props){
-// // Prompt the user for the baseUrl and wsUrl
-// const baseUrl = 'http://localhost:8888';
-// const domain = baseUrl.split('://').slice(1).join('://');
-// const wsUrl = `ws://${domain}`;
- 
-// // Create a connection options object
-// const connectionOptions = {
-//   baseUrl,
-//   wsUrl,
-// };
- 
-// const { store, dispatch } = createStore({
-//   filename: 'test',
-//   executionState: 'not connected',
-//   notebook: null,
-// });
- 
-// const notebook = require('PATH_TO_NOTEBOOK.ipynb');
-// const channels='';
+class Notebook extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state={
+            models:[],
+            script:""
+        };
+        console.log("In target");
 
-// enchannelBackend.spawn(connectionOptions, 'python3').then(id => {
-//   console.info('spawned', id); // eslint-disable-line
-//   return id;
-// }).catch(err => {
-//   console.error('could not spawn', err); // eslint-disable-line
-//   throw err;
-// }).then(id => {
-//   return Promise.all([id, enchannelBackend.connect(connectionOptions, id)]);
-// }).catch(err => {
-//   console.error('could not connect', err); // eslint-disable-line
-//   throw err;
-// }).then(args => {
-//   const id = args[0];
-//   const channels = args[1];
-//   console.info('connected', id, channels); // eslint-disable-line
- 
-// //   const html = 
-// });
+    }
 
-// return(
-//     <Notebook
-//                   store={store}
-//                   dispatch={dispatch}
-//                   channels={channels}
-//                   contents={notebook}
-//                 />;
-// )
-// }
+    getData(){
+        // console.log(this.props.location.search);
+        // let search=this.props.location.search;
+        // let query=queryString.parse(search)
+        // console.log(query);
+   
+        // sessionStorage.setItem("U_script",query.script);
+        // sessionStorage.setItem("U_model",query.model);
+        
+        // axios.get('/get_models_by_scriptName?script='+query.script).then(res => {
+        //     let data = res.data
+        //     this.setState({models : data.models, script:query.script})
+        // })
+    }
+    
+    componentDidMount(){
+        window.open('static/models/Untitled.ipynb?kernel_name=python3');
+    }
+
+    render(){
+        console.log("inside SelectTarget");
+
+    return(
+            // return <MarkdownRender />
+                <div class="heading hv-center">
+                    <span>
+                        <a href='http://localhost:8888/notebooks/Untitled.ipynb?kernel_name=python3' target="_blank"><h4>DISPLAY NOTEBOOK</h4></a>
+                    </span>
+                    {/* <iframe src='http://localhost:8888/notebooks/Untitled.ipynb?kernel_name=python3' title="Jupyter Notebook"> */}
+
+                    {/* </iframe> */}
+                </div>
+    );
+              
+        
+    }
+}
+
+export default withRouter(Notebook);
