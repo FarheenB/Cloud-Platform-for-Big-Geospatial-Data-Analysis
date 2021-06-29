@@ -1,6 +1,7 @@
 from flask import Flask, render_template, url_for, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import and_
+from sqlalchemy.dialects.sqlite import BLOB
 
 from datetime import datetime
 from datetime import date
@@ -15,6 +16,8 @@ from flask_jwt_extended import JWTManager
 from flask_jwt_extended import (create_access_token, create_refresh_token)
 import hashlib
 from email_validator import validate_email, EmailNotValidError
+
+# import rasterio   
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
@@ -38,8 +41,7 @@ class Project(db.Model):
     description = db.Column(db.String(120),nullable=True)
     script_id = db.Column(db.Integer, db.ForeignKey('script.id', ondelete='CASCADE'), nullable=True)
     model_id = db.Column(db.Integer, db.ForeignKey('model.id', ondelete='CASCADE'), nullable=True)
-    model_loc= db.Column(db.String(120),unique=True,nullable=True)
-    data_category=db.Column(db.String(120),nullable=False)
+    model_loc = db.Column(db.String(120),unique=True,nullable=True)
     dataset_loc=db.Column(db.String(120),unique=True,nullable=True)
     created_by = db.Column(db.String(80), db.ForeignKey('user.username'), nullable=False)
     created_on = db.Column(db.Date(), default=date.today(),nullable=False)
@@ -58,6 +60,21 @@ class Project(db.Model):
 
     def __repr__(self):
         return '<Project %r>' % self.title
+
+class Proj_Dataset(db.Model):
+    id=db.Column(db.Integer, primary_key=True)
+    project_id=db.Column(db.Integer, db.ForeignKey('project.id', ondelete='CASCADE'), nullable=False)
+    dataset=db.Column(db.LargeBinary,nullable=False)
+    file_name=db.Column(db.String(80), nullable=False)
+    satellite_category=db.Column(db.String(80), nullable=False)
+    processed=db.Column(db.Boolean, default=False)
+
+    project = db.relationship('Project',
+        backref=db.backref('dataset', lazy=True))
+
+    def __repr__(self):
+        return '<Dataset %r>' % self.file_name
+
 
 class Script(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -80,7 +97,6 @@ class Model(db.Model):
 
     def __repr__(self):
         return '<Model %r>' % self.name
-
 
 @app.route("/")
 def home():
@@ -669,21 +685,217 @@ def delete_model():
 
 # <------------------------------------------------------DATASET-------------------------------------------------------------------------->
 
+def convertToBinaryData(filename):
+    # Convert digital data to binary format
+    with open(filename, 'rb') as file:
+        blobData = file.read()
+    return blobData
+    
+def convertToFile(data, filename):
+    print("---writing")
+    with open(filename, 'wb') as f:
+        f.write(data)
+
 @app.route("/add_dataset", methods=["GET", "POST"])
 def add_dataset():
+
     if request.method == "POST":
-        file = request.files['file'] 
-        datasetURL=fileUpload('static/dataset',file)['path']
+        print(request)
+        parser = reqparse.RequestParser()   
+        parser.add_argument('project_id', help = 'Project ID cannot be blank', required = True)
+        parser.add_argument('category', help = 'Category cannot be blank', required = True)
+
+        data = parser.parse_args()
+        print(data)
+
+        # delete already existing dataset    
+        datasets=Proj_Dataset.query.filter(Proj_Dataset.project_id==data['project_id']).all()
+        if datasets:
+            delete_dataset_by_projectId(data['project_id'])
+
+
+        numberFiles=len(request.files)
+        for i in range(numberFiles):
+            file = request.files['file'+str(i)]
+            print(file)
+
+            new_dataset = Proj_Dataset(project_id=data['project_id'], dataset=file.read(), file_name=file.filename, satellite_category=data['category'])
+            db.session.add(new_dataset)
+            db.session.commit() 
+        
         return {
-            'datasetURL':datasetURL,
+            # 'datasetURL':'a',
             'success':True
         }
     return{
         'error':"Invalid"
     }
 
+@app.route("/get_datasets", methods=["GET"])
+def get_datasets():
+    if request.method == "GET":  
+        try:
+            print("Dataset---")
+            dataset_records = Proj_Dataset.query.all()
+            datasets=[]
+            print("Done---")
+
+            for row in dataset_records:
+                project=Projects.filter(project_id=row.project_id).first()
+                project_title=project['title']
+                username=project['created_by']
+                
+                datasets.append({
+                    'dataset_id':row.id,
+                    'project_title':project_title,
+                    'file_name':row.file_name,
+                    'satellite_category':row.satellite_category,
+                    'processed':row.processed,
+                    'username': username
+
+                    })
+            # print(datasets)
+
+            return {
+                'datasets': datasets,
+                'success':True
+            }
+                            
+        except:
+            raise Exception()
+
+@app.route("/get_dataset_by_projectId", methods=["GET"])
+def get_dataset_by_projectId():
+    if request.method=='GET':
+        project_id=request.args.get('project_id');   
+
+        try:
+            # models_records = db.session.query(Model).join(Script,Script.id==Model.script_id).filter(Script.name==data.script).all()
+            dataset_records=Proj_Dataset.query.filter(Proj_Dataset.project_id==project_id).all()
+            db.session.commit()
+            print(dataset_records)
+
+            dataset=[]
+            for row in dataset_records:
+                # project=Project.query.filter(Project.id==row.project_id).first()
+                # print(project)
+                # project_title=project.title
+                # username=project.created_by
+
+                # dataset.append({
+                #     'id':row.id,
+                #     'project_title':project_title,
+                #     'file':row.dataset,
+                #     'file_name':row.file_name,
+                #     'satellite_category':row.satellite_category,
+                #     'username': username
+                #     })
+                dataset.append({
+                    'id':row.id,
+                    'file_name':row.file_name
+                    })
+
+                print("Fetched all dataset by project_id")
+            return {
+                'dataset': dataset
+            }
+                            
+        except:
+            raise Exception()
+
+def delete_dataset_by_projectId(project_id):
+    Proj_Dataset.query.filter(Proj_Dataset.project_id==project_id).delete()
+
+
+@app.route("/perform_stacking", methods=["POST"])
+def perform_stacking():
+    print("**----------",request)
+
+    if request.method == "POST":
+        try:
+            parser = reqparse.RequestParser()
+            parser.add_argument('filename', help = 'Filename cannot be blank', required = True)
+            parser.add_argument('dataset_ids', help = 'dataset_ids cannot be blank', required = True)
+
+
+            data = parser.parse_args()   
+            print("get dataset---", data['dataset_ids'])
+
+            
+
+            # datasets=get_dataset_by_projectId(data['project_id'])['dataset']
+
+            # print(len(datasets))
+            # print(datasets[0]['id'])
+
+            # file_list = ['/content/drive/MyDrive/image_R.TIF', '/content/drive/MyDrive/image_G.TIF', '/content/drive/MyDrive/image_B.TIF']
+            file_list=[]
+            project_title=''
+            username=''
+            project_id=-1
+
+            dataset_ids= data['dataset_ids'].split(',')
+            for dataset_id in dataset_ids:
+                # print(file['id'])
+                print(dataset_id)
+                dataset_record=Proj_Dataset.query.filter(and_(Proj_Dataset.id==dataset_id, Proj_Dataset.processed==False)).first()
+
+                file_list.append(dataset_record.dataset)
+                category=dataset_record.satellite_category
+                project_id=dataset_record.project_id
+                project=Project.query.filter(Project.id==dataset_record.project_id).first()
+                print(project)
+                project_title=project.title
+                username=project.created_by
+
+            # <----- To uncomment ----->
+            # # Read metadata of first file
+            # with rasterio.open(file_list[0]) as src0:
+            #     meta = src0.meta
+
+            # # Update meta to reflect the number of layers
+            # meta.update(count = len(file_list))
+
+            # Read each layer and write it to stack
+            # dataset_folder=os.path.join('Users',username+'//'+project_title)
+            # stacked_file=os.path.join(dataset_folder,filename+'.tif')
+
+            user_folderPath="Users"
+            dataset_folder=os.path.join(username, project_title)
+            try:
+                os.makedirs(os.path.join(user_folderPath,dataset_folder), exist_ok = True)
+            except OSError as error:
+                print("Directory '%s' can not be created" % dataset_folder)
+
+            stacked_file=os.path.join(user_folderPath,dataset_folder)+"\\"+data['filename']+'.tif'
+
+            print(stacked_file)
+            convertToFile(file_list[0],stacked_file)
+
+            # with rasterio.open(stacked_file, 'w', **meta) as dst:
+            #     for id, layer in enumerate(file_list, start=1):
+            #         with rasterio.open(layer) as src1:
+            #             dst.write_band(id, src1.read(1))
+
+            # new_dataset = Proj_Dataset(project_id=data['project_id'], dataset=stacked_file.read(), file_name=data['filename'], satellite_category=category, process=True)
+            new_dataset = Proj_Dataset(project_id=project_id, dataset=file_list[0], file_name=data['filename']+'.tif', satellite_category=category, processed=True)
+            db.session.add(new_dataset)
+            db.session.commit() 
+
+
+            return {
+                'file':data['filename']+'.tif',
+                'success':True
+            }
+
+                            
+        except:
+            raise Exception()
 
 # <--------------------------------------------------CREATE_PROJECT_MODEL----------------------------------------------------------->
+
+
+
 
 @app.route("/set_project_model", methods=["GET", "POST"])
 def set_project_model():

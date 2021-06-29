@@ -1,5 +1,7 @@
 import React from 'react'
 import './AdminComponent.css'
+import project_icon from "../../static/images/logo5.svg"
+
 import axios from 'axios';
 
 class AdminComponent extends React.Component {
@@ -10,6 +12,7 @@ class AdminComponent extends React.Component {
             scripts:[],
             models:[],
             projects:[],
+            datasets:[],
             status:""
         };
     }
@@ -33,6 +36,11 @@ class AdminComponent extends React.Component {
         axios.get('/get_projects').then(res => {
             let data = res.data
             this.setState({projects : data.projects})
+        })
+
+        axios.get('/get_datasets').then(res => {
+            let data = res.data
+            this.setState({datasets : data.datasets})
         })
     }
     
@@ -150,7 +158,7 @@ class AdminComponent extends React.Component {
                         this.state.scripts.map(script => (     
                             <tr>
                                 <th scope="row">{script.script_id}</th>
-                                <td><img class="logo-display" src={script.logoURL} alt="Script Logo"/></td>
+                                <td><a href={script.logoURL}><img class="logo-display" src={script.logoURL} alt="Script Logo"/></a></td>
                                 <td>{script.name}</td>
                                 <td>{script.description}</td>
                                 <td>
@@ -198,7 +206,7 @@ class AdminComponent extends React.Component {
                         this.state.models.map(model => (     
                             <tr>
                                 <th scope="row">{model.model_id}</th>
-                                <td><a href={model.code_path}><i class="fa fa-file fa-2x" aria-hidden="true"></i></a> </td>
+                                <td><a href={model.code_path}><img className="code-display" src={project_icon} alt="Model Code"/></a> </td>
                                 <td>{model.script_name}</td>
                                 <td>{model.name}</td>
                                 <td>{model.description}</td>
@@ -274,6 +282,55 @@ class AdminComponent extends React.Component {
                 </div>
 
             </div>
+                
+                <div class="row admin-page hv-center">
+                    <div class="col-md-12">
+                        <div class="admin-card card">
+                            <div class="card-header card-header-info">
+                            <h4 class="card-title">Dataset</h4>
+                            <p class="card-category">All the projects created on this platform</p>
+                            </div>
+                            <div class="card-body table-responsive">
+                                <table class="table table-hover">
+                                    <thead class="text-info">
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Project Title</th>
+                                            {/* <th scope="col">Data</th> */}
+                                            <th scope="col">File Name</th>
+                                            <th scope="col">Category</th>
+                                            <th scope="col">Processed</th>
+                                            <th scope="col">Username</th>
+                                            <th scope="col">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {
+                                    this.state.datasets.map(dataset => (     
+                                        <tr>
+                                            <th scope="row">{dataset.dataset_id}</th>
+                                            <td>{dataset.project_name}</td>
+                                            {/* <td>{dataset.data}</td> */}
+                                            <td>{dataset.file_name}</td>
+                                            <td>{dataset.satellite_category}</td>
+                                            <td>{dataset.processed}</td>
+                                            <td>{dataset.username}</td>
+                                            <td>
+                                                <button type="button" class="btn btn-danger btn-sm px-3">
+                                                    <i class="fa fa-times"/>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        ))
+                                    }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            
             </div>
             </div>
         );

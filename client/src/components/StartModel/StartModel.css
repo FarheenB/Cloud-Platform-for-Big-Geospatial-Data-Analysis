@@ -1,0 +1,34 @@
+
+.start
+{
+  font-size: 150px;
+
+  /* width:100px;
+  height:100px;
+  background:red; */
+  transition: all 1s ease-in-out;
+  -webkit-transition: all 1s ease-in-out;
+  -moz-transition: all 1s ease-in-out;
+  -o-transition: all 1s ease-in-out;
+  -ms-transition: all 1s ease-in-out;
+  /* position:absolute; */
+  color:#117a8b;
+}
+.start:hover
+{
+  transform: translate(1em,0);
+  -webkit-transform: translate(1em,0);
+  -moz-transform: translate(1em,0);
+  -o-transform: translate(1em,0);
+  -ms-transform: translate(1em,0);
+}
+
+.start span{
+    font-size: 20px!important;
+}
+
+.start-model-row .heading{
+    font-size: 30px;
+    padding: 20px;
+    /* color:#17a2b8; */
+}

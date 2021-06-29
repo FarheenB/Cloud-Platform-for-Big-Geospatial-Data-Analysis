@@ -1,5 +1,7 @@
 import React from 'react'
 import './AdminComponent.css'
+import project_icon from "../../static/images/logo4.svg"
+
 import axios from 'axios';
 
 class AddModels extends React.Component {
@@ -11,6 +13,7 @@ class AddModels extends React.Component {
             scriptId:"", 
             scriptsCategories:[],  
             // codeURL:"",
+            model_code:"",
             errors:{
               form:""
             },
@@ -50,6 +53,9 @@ class AddModels extends React.Component {
     handleChange = (e) => {
         console.log("Inside create Model",this.state);
         this.state.errors.form="";
+        if(e.target.files){
+            this.setState({model_code:URL.createObjectURL(e.target.files[0])})
+        }
         const {id , value} = e.target   
         this.setState(prevState => ({
             ...prevState,
@@ -119,9 +125,13 @@ class AddModels extends React.Component {
                     </div>
                     <div className="admin-inner-card card col-12 col-lg-3">
                     <form autoComplete="off">
-                         <div className="form-group">
-                            <label for="imageFile">Upload code:</label>
-                            <input ref={(ref) => { this.uploadInput = ref; }} type="file" accept=".ipynb, .py" onChange={this.handleChange}/>
+                         <div className="form-group logo">
+                            <label for="codeFile">Model Code:</label>
+                            <input className="code-upload" ref={(ref) => { this.uploadInput = ref; }} type="file" accept=".ipynb, .py" onChange={this.handleChange}/>
+                            {
+                                this.state.model_code &&
+                                <a href={this.state.model_code}> <img className="code-display" src={project_icon} alt="Model Code"/></a>
+                            }
                         </div>
 
                         {/* <div className="form-group create-script-button">

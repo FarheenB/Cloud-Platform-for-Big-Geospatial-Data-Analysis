@@ -31,20 +31,36 @@
     margin-bottom: 0px !important;
   } */
 
-.logo-upload{
-  width: 80px;
-  height:80px;
-  /* padding:5px; */
-  margin-bottom: 10px;
+.logo{
+  width:390px;
+  min-height: 30px;
+  text-align: left;
+
 }
 
+
+.logo-upload{
+  /* padding:5px; */
+  /* margin-bottom: 10px;  */
+  padding-right: 5px;
+  width: 270px;
+
+}
+.code-upload{
+  /* padding:5px; */
+  /* margin-bottom: 10px;  */
+  padding-right: 5px;
+  width: 268px;
+
+}
 .logo-display{
+  width: 45px;
+  height:45px;
+}
+.code-display{
   width: 40px;
   height:40px;
-  /* padding:5px; */
-  margin-bottom: 10px;
 }
-
 .admin-page table{
   text-align: left!important;
 }

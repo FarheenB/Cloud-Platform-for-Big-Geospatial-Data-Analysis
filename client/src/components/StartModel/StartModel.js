@@ -6,7 +6,7 @@ import CreateProject from "../CreateProject/CreateProject"
 import project_icon from "../../static/images/project-icon.png"
 import { format } from 'date-fns'
 import { Date } from 'prismic-reactjs';
-// import './Models.css';
+import './StartModel.css';
 import ProgressBar from '../ProgressbarComponent/ProgressbarComponent';
 
 class StartModel extends React.Component {
@@ -106,22 +106,26 @@ class StartModel extends React.Component {
 
         return(
             <div class="autoML models">
-                <ProgressBar active='4'/>
-                <div class="heading hv-center">
+                <ProgressBar active='5'/>
+                {/* <div class="heading hv-center">
                     <span>
-                        <h4></h4>
+                        <h4>Start</h4>
                     </span>
-                </div>
-            
-                <div class="models-row row hv-center">
-                    <div class="columns hv-center mt-4"> 
-                    <div className="form-group create-script-button">
-                    <button 
-                        type="submit" 
-                        className="btn btn-primary"
-                        onClick={this.handleSubmit}
-                    >Start</button>
-                </div>
+                </div> */}
+                
+                <div class="start-model-row row hv-center">
+                    <div class="columns hv-center"> 
+                        <span className="heading">
+                            Let's start the model
+                        </span>
+                    </div>
+                    <div class="columns hv-center"> 
+                        <div className="form-group create-script-button">
+                            <div 
+                                className="start"
+                                onClick={this.handleSubmit}
+                            ><i class="fa fa-angle-double-right" aria-hidden="true"></i></div>
+                    </div>
                     </div>
                 </div>  
                 <div className="mt-5"></div>

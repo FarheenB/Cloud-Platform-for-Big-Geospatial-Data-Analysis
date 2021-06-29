@@ -7,13 +7,14 @@ class AddScripts extends React.Component {
         this.state = {
             // imageURL: "",
             name:"",
-            description:"",    
+            description:"",  
+            logo:"",  
             errors:{
               form:""
             },
             success:false
         };
-        this.handleUploadImage = this.handleUploadImage.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
     handleUploadImage(ev) {
@@ -34,8 +35,12 @@ class AddScripts extends React.Component {
       }
 
     handleChange = (e) => {
-        console.log("Inside create Script",this.state);
+        console.log("before Inside create Script",this.state);
         this.state.errors.form="";
+        if(e.target.files){
+            this.setState({logo:URL.createObjectURL(e.target.files[0])})
+        }
+        console.log("after logo--",this.state)
         const {id , value} = e.target   
         this.setState(prevState => ({
             ...prevState,
@@ -107,9 +112,13 @@ class AddScripts extends React.Component {
                     <div className="admin-inner-card card col-12 col-lg-3">
 
                     <form autoComplete="off">                       
-                        <div className="form-group">
-                            <label for="imageFile">Upload script logo:</label>
-                            <input ref={(ref) => { this.uploadInput = ref; }} type="file" accept=".jpg, .jpeg, .png"/>
+                        <div className="form-group logo">
+                            <label for="imageFile">Script Logo:</label>
+                            <input className="logo-upload" ref={(ref) => { this.uploadInput = ref; }} type="file" accept=".jpg, .jpeg, .png" onChange={this.handleChange}/>
+                            {
+                                this.state.logo &&
+                                <a href={this.state.logo}><img className="logo-display" src={this.state.logo} alt="Script Logo"/></a>
+                            }
                         </div>
 
                         {/* <div className="form-group create-script-button">
@@ -125,8 +134,12 @@ class AddScripts extends React.Component {
                             <img src={"../"+this.state.imageURL} alt="img" class="logo-upload"/>
                             }
                         </div> */}
-
-
+                        {/* {
+                            this.state.logo &&
+                            <div className="logo-display">
+                                <img src={this.state.logo} alt="Script Logo"/>
+                            </div>
+                        } */}
                         <div className="form-group">
                             <input
                                 type="text"

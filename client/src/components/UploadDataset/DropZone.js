@@ -3,15 +3,20 @@ import './UploadDataset.css';
 import { useDropzone } from 'react-dropzone';
 import { useHistory } from "react-router-dom";
 
+// import { CircularProgressbar } from 'react-circular-progressbar';
+// import 'react-circular-progressbar/dist/styles.css';
+
+import CircularProgress from '@material-ui/core/CircularProgress'
+
 const DropZone = ({model, script, category}) => {
     const [state , setState] = useState({
         datasetURL:"",
         datasetType:"",
-        form_error:""
-        
+        uploading:false,
+        form_error:""      
     });
 
-  const maxSize = 10485760;
+  const maxSize = 104857600;
 
   const onDrop = useCallback(acceptedFiles => {
     console.log("--->",acceptedFiles);
@@ -32,11 +37,11 @@ const DropZone = ({model, script, category}) => {
 
   const handleSubmit = (event) => {
     event.preventDefault(event);
-
+    
     if(category===''){
-        setState({form_error:"Select data category"});
-    }
+        setState({uploading:false, form_error:"Select data category"});
 
+    }
     // let model=sessionStorage.getItem("U_model");
     // let script=sessionStorage.getItem("U_script");
     // let dataset=acceptedFiles[0];
@@ -46,10 +51,21 @@ const DropZone = ({model, script, category}) => {
     // console.log("dataset",dataset);
     // history.push('/select_target?script='+script+'&model='+model+'&dataset='+datasetType);
     else{
+        setState({uploading:true, form_error:''});
+        console.log("---state---",state)
         let url = "/add_dataset"
         let formData  = new FormData();
-        formData.append('file', acceptedFiles);
+        let i;
+        for(i=0;i<acceptedFiles.length;i++){
+            formData.append('file'+i, acceptedFiles[i]);
+        }
+        // formData.append('file', acceptedFiles[0]);
+        // // formData.append('file1', acceptedFiles[1]);
+        // // formData.append('file2', acceptedFiles[2]);
+
+
         formData.append('category', category);
+        formData.append('project_id', sessionStorage.getItem('U_project_id'));
         console.log(acceptedFiles);
         console.log(formData);
 
@@ -60,24 +76,24 @@ const DropZone = ({model, script, category}) => {
         }).then( res => res.json())
         .then(data=>{
             if(data.success){
-                let datasetType=acceptedFiles[0].type.split('/')[0];
+                // let datasetType=acceptedFiles[0].type.split('/')[0];
 
-                setState({datasetURL:data.datasetURL,datasetType:datasetType});
-                sessionStorage.setItem("U_datasetURL",data.datasetURL);
+                // setState({datasetURL:data.datasetURL,datasetType:datasetType});
+                // sessionStorage.setItem("U_datasetURL",data.datasetURL);
 
-                history.push('/start_model?script='+script+'&model='+model+'&dataset='+datasetType);           
+                history.push('/stacking?script='+script+'&model='+model);           
 
             }
 
 
         }).catch(err => console.log(err));
-    
-        }
+    }
+        
     }
     
   
-    console.log("category==",category);
-    console.log("form error==",state.form_error);
+    console.log("-----state",state);
+    console.log("-----category",category);
 
 
 
@@ -89,7 +105,7 @@ const DropZone = ({model, script, category}) => {
             <input {...getInputProps()} />
                 <div id="dropZ">
                     <div><i class="fa fa-cloud-upload"></i></div>
-                    <input ref={(ref) => { this.uploadInput = ref; }} {...getInputProps()} />
+                    <input ref={(ref) => { this.uploadInput = ref; }} {...getInputProps()}/>
                     {/* <span>{isDragActive ? "📂" : "📁"}</span> */}
                     {/* {!isDragActive && 'Click here or drop a file to upload!'} */}
                     {/* {isDragActive && !isDragReject && "Drop it like it's hot!"} */}
@@ -131,7 +147,7 @@ const DropZone = ({model, script, category}) => {
                     </div>
                     <div>
                         <span>
-                            File size limit : 10 MB
+                            File size limit : 100 MB
                         </span>
                     </div>
 
@@ -157,15 +173,23 @@ const DropZone = ({model, script, category}) => {
                 type="submit" 
                 className="btn btn-primary"
                 onClick={handleSubmit}
-                disabled={acceptedFiles.length<=0} 
-            >Upload</button>
+                disabled={acceptedFiles.length===0 || state.uploading} 
+            >{state.uploading?"Uploading...":"Upload"}</button>
         </div>
 
-        {state.form_error.length>0 && 
+        {
+            state.form_error.length>0 && 
             <div class="form-error">
-            <span className='error'>{state.form_error}</span>
+                <span className='error'>{state.form_error}</span>
             </div>
         } 
+        { 
+            state.uploading &&
+            <div className="progressbar">
+                <CircularProgress color="inherit"/>
+
+            </div>
+        }
     </div>
  
   );

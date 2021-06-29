@@ -144,3 +144,8 @@
   /* .create-script-button{
     margin-bottom: 0px;
   } */
+
+  .progressbar{
+    width: 1000; height: 10;
+    color:#117a8b 
+  }

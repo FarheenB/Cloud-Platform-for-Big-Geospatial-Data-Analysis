@@ -40,13 +40,13 @@ class ProgressBar extends React.Component {
             <div class="progressbar-container ">
             <ul class="progressbar hv-center">
             
-                {/* <li class={this.props.active==="2" || this.props.active==="3" || this.props.active==="4" || this.props.active==="5"?"active":this.props.active==="1"?"on":""}
+                <li class={this.props.active==="2" || this.props.active==="3" || this.props.active==="4" || this.props.active==="5"?"active":this.props.active==="1"?"on":""}
                 onClick={this.props.active==="2"?this.props.history.goBack :""}>
                     <span>Select Problem Type</span></li>
 
                 <li class={this.props.active==="3" || this.props.active==="4" || this.props.active==="5"?"active":this.props.active==="2"?"on":""} 
                 onClick={this.props.active==="3"?this.props.history.goBack:""}>
-                    <span>Select Algorithm</span></li>
+                    <span>Select Model</span></li>
 
                 <li class={this.props.active==="4" || this.props.active==="5"?"active":this.props.active==="3"?"on":""} 
                 onClick={this.props.active==="4"?this.props.history.goBack:""}>
@@ -54,12 +54,12 @@ class ProgressBar extends React.Component {
 
                 <li class={this.props.active==="5"?"active":this.props.active==="4"?"on":""}
                 onClick={this.props.active==="5"?this.props.history.goBack:""}>
-                    <span>Select Mode/Target</span></li>
+                    <span>Perform Stacking</span></li>
 
                 <li class={this.props.active==="5"?"on":""}>
-                    <span>Start</span></li> */}
+                    <span>Start</span></li>
 
-                <li class={this.props.active==="2" || this.props.active==="3" || this.props.active==="4"?"active":this.props.active==="1"?"on":""}
+                {/* <li class={this.props.active==="2" || this.props.active==="3" || this.props.active==="4"?"active":this.props.active==="1"?"on":""}
                 onClick={this.props.active==="2"?this.props.history.goBack :""}>
                     <span>Select Problem Type</span></li>
 
@@ -72,7 +72,7 @@ class ProgressBar extends React.Component {
                     <span>Select/Add Data</span></li>
 
                 <li class={this.props.active==="4"?"on":""}>
-                    <span>Start</span></li>
+                    <span>Start</span></li> */}
                
                 {(this.props.active==="1" || this.props.active==="2" || this.props.active==="3") && 
                 <div className="skip" onClick={this.props.handleSkip}>

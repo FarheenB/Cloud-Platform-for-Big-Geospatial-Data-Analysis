@@ -52,11 +52,11 @@ class Models extends React.Component {
         return(
             <div class="autoML models">
                 <ProgressBar active='2' handleSkip={this.handleSkip}/>
-                <div class="heading hv-center">
+                {/* <div class="heading hv-center">
                     <span>
-                        <h4>SELECT AN ALGORITHM</h4>
+                        <h4>SELECT THE MODEL</h4>
                     </span>
-                </div>
+                </div> */}
             
                 <div class="models-row row hv-center">
                     <div class="columns hv-center mt-4"> 
